@@ -254,7 +254,7 @@
       return (
         <div className="min-h-screen bg-slate-50 font-sans text-slate-900 pb-12">
           {/* Red Hat Branded Header with animated gradient */}
-          <header className="animated-gradient text-white py-6 px-6 text-center shadow-lg relative overflow-hidden">
+          <header className="animated-gradient text-white py-8 px-6 text-center shadow-lg relative overflow-hidden">
             {/* Sparkle particles */}
             {[...Array(6)].map((_, i) => (
               <div
@@ -267,21 +267,20 @@
                 }}
               />
             ))}
-          </header>
-
-          <main className="max-w-2xl mx-auto px-4 -mt-6 pt-6">
-            {/* Title and Quote Section */}
-            <div className="text-center mb-6">
-              <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-3 text-slate-900">
-                Red Hat Open Training Program
+            <div className="max-w-2xl mx-auto relative z-10">
+              <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-2 fade-in-up">
+                Are you "the person in the red hat?"
               </h1>
-              <p className="text-slate-600 italic text-lg mb-2">
+              <p className="text-red-100 italic text-lg opacity-90 fade-in-up mb-3" style={{ animationDelay: '0.2s' }}>
                 "Marc Ewing shared his knowledge and started a revolution. Today, you can do the same."
               </p>
-              <p className="text-slate-500 text-base font-semibold">
+              <p className="text-red-50 text-base font-semibold fade-in-up" style={{ animationDelay: '0.4s' }}>
                 From In-Demand to On-Demand
               </p>
             </div>
+          </header>
+
+          <main className="max-w-2xl mx-auto px-4 -mt-6 pt-2">
 
             {/* Open Training Program Description */}
             <section className="bg-white rounded-2xl shadow-xl p-6 mb-6 border border-slate-100 scroll-animate interactive-card">
@@ -343,6 +342,8 @@
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <a 
                       href="https://red.ht/open-training-request" 
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="flex items-center justify-center gap-2 bg-[#EE0000] hover:bg-[#CC0000] text-white font-bold py-4 px-6 rounded-xl transition-all shadow-md active:scale-95 pulse-glow hover:scale-105 hover:shadow-xl relative overflow-hidden group"
                     >
                       <span className="absolute inset-0 shimmer"></span>
@@ -454,6 +455,8 @@
                   <div className="mb-6">
                     <a 
                       href="https://red.ht/open-training-request" 
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="block w-full bg-[#EE0000] hover:bg-[#CC0000] text-white font-bold py-4 px-6 rounded-xl flex items-center justify-center gap-2 transition-all active:scale-95"
                     >
                       <Icon name="FileText" size={20} />
@@ -522,6 +525,8 @@
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <a 
                   href="https://source.redhat.com/departments/products_and_global_engineering/whats_new_from_products_and_portfolio/open_training_program" 
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="flex items-center gap-3 p-3 rounded-lg hover:bg-slate-100 transition-colors"
                 >
                   <Icon name="Users" size={18} className="text-red-500" />

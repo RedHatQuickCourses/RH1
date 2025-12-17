@@ -1,6 +1,6 @@
-# Red Hat Open Training - Landing Page
+# Red Hat Open Training Program - Landing Page
 
-A beautiful, interactive landing page for the Red Hat Open Training Rapid Course Builder (RCB) program, optimized for QR code access and GitHub Pages hosting.
+A beautiful, interactive landing page for the Red Hat Open Training Program, featuring the Rapid Course Builder (RCB) tool and showcasing published training courses. Optimized for QR code access and GitHub Pages hosting.
 
 ## Features
 
@@ -33,9 +33,9 @@ A beautiful, interactive landing page for the Red Hat Open Training Rapid Course
    ```bash
    git init
    git add .
-   git commit -m "Initial commit: RCB landing page"
+   git commit -m "Initial commit: Open Training landing page"
    git branch -M main
-   git remote add origin https://github.com/YOUR-ORG/YOUR-REPO.git
+   git remote add origin https://github.com/RedHatQuickCourses/RH1.git
    git push -u origin main
    ```
 
@@ -48,7 +48,7 @@ A beautiful, interactive landing page for the Red Hat Open Training Rapid Course
 
 3. **Your site will be live at:**
    ```
-   https://YOUR-ORG.github.io/YOUR-REPO/
+   https://redhatquickcourses.github.io/RH1/
    ```
 
 ### Option 2: Using `gh-pages` Branch
@@ -91,12 +91,28 @@ jobs:
       - uses: actions/deploy-pages@v1
 ```
 
+## Page Structure
+
+The landing page includes:
+
+1. **Header**: Animated red gradient with title "Are you 'the person in the red hat?'" and inspirational quote
+2. **Open Training Program Card**: Description of the self-service content development model
+3. **Tab Navigation**: "For Associates" and "For Partners" tabs
+4. **For Associates Tab**:
+   - Rapid Course Builder (RCB) section with early access badge
+   - Process steps for creating courses
+   - Benefits section
+   - Coming soon features
+5. **For Partners Tab**: Collaboration information and CTA
+6. **Published Courses**: 7 courses with Associate and Partner links
+7. **Resources Section**: Quick links and support information
+
 ## Customization
 
 ### Update Course Count
-Edit the `targetCount` in the `useEffect` hook (line ~30):
+Edit the `targetCount` in the `useEffect` hook:
 ```javascript
-const targetCount = 2; // Change to your actual course count
+const targetCount = 7; // Current course count
 ```
 
 ### Add More Courses
@@ -105,12 +121,20 @@ Update the `publishedCourses` array:
 const publishedCourses = [
   {
     title: "Course Name",
-    desc: "Course description",
-    link: "https://course-url.com"
+    contributors: "Contributor Name(s)",
+    associateLink: "https://associate-link.com",
+    partnerLink: "https://partner-link.com"
   },
   // Add more courses...
 ];
 ```
+
+### Update RCB Tool Link
+The RCB tool link is currently set to:
+```javascript
+href="http://72.32.49.189:8501/"
+```
+Update this if the RCB tool URL changes.
 
 ### Customize Colors
 The page uses Red Hat's brand color `#EE0000`. To customize:
@@ -138,8 +162,30 @@ To embed the intake form directly:
 .
 ├── index.html          # Main landing page (single file)
 ├── README.md          # This file
-└── .nojekyll          # Prevents Jekyll processing (if needed)
+├── .nojekyll          # Prevents Jekyll processing
+└── from-gemini.ts     # Original component file (reference)
 ```
+
+## Key Features
+
+### Open Training Program
+- Self-service content development model
+- Empowers subject matter experts to share knowledge
+- Collaborative approach complementing formal development
+
+### Rapid Course Builder (RCB)
+- AI-powered drafting assistant
+- Early access pilot program
+- Streamlit-based interface
+- Kerberos ID login (no password required)
+- Access: http://72.32.49.189:8501/
+
+### Published Courses
+Currently displaying 7 published courses with:
+- Course titles
+- Contributor information
+- Separate Associate and Partner links
+- Links open in new tabs
 
 ## Browser Support
 
