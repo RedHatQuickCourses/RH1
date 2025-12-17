@@ -216,10 +216,6 @@ Currently displaying 7 published courses with:
 4. Test thoroughly
 5. Submit a pull request
 
-## License
-
-Copyright © 2026 Red Hat Open Training Initiative
-
 ---
 
 **Build. Share. Revolutionize.** 🚀
