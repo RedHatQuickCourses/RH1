@@ -254,7 +254,7 @@
       return (
         <div className="min-h-screen bg-slate-50 font-sans text-slate-900 pb-12">
           {/* Red Hat Branded Header with animated gradient */}
-          <header className="animated-gradient text-white py-8 px-6 text-center shadow-lg relative overflow-hidden">
+          <header className="animated-gradient text-white py-6 px-6 text-center shadow-lg relative overflow-hidden">
             {/* Sparkle particles */}
             {[...Array(6)].map((_, i) => (
               <div
@@ -267,21 +267,36 @@
                 }}
               />
             ))}
-            <div className="max-w-2xl mx-auto relative z-10">
-              <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-2 fade-in-up">
-                Are you "the person in the red hat?"
+          </header>
+
+          <main className="max-w-2xl mx-auto px-4 -mt-6 pt-6">
+            {/* Title and Quote Section */}
+            <div className="text-center mb-6">
+              <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-3 text-slate-900">
+                Red Hat Open Training Program
               </h1>
-              <p className="text-red-100 italic text-lg opacity-90 fade-in-up mb-3" style={{ animationDelay: '0.2s' }}>
+              <p className="text-slate-600 italic text-lg mb-2">
                 "Marc Ewing shared his knowledge and started a revolution. Today, you can do the same."
               </p>
-              <p className="text-red-50 text-base font-semibold fade-in-up" style={{ animationDelay: '0.4s' }}>
+              <p className="text-slate-500 text-base font-semibold">
                 From In-Demand to On-Demand
               </p>
             </div>
-          </header>
 
-          <main className="max-w-2xl mx-auto px-4 -mt-6 pt-2">
-            {/* Audience Toggle - Moved to Top */}
+            {/* Open Training Program Description */}
+            <section className="bg-white rounded-2xl shadow-xl p-6 mb-6 border border-slate-100 scroll-animate interactive-card">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="bg-red-50 p-2 rounded-lg text-[#EE0000] float-animation">
+                  <Icon name="BookOpen" size={24} />
+                </div>
+                <h2 className="text-xl font-bold">Open Training Program</h2>
+              </div>
+              <p className="text-slate-600 leading-relaxed">
+                Open Training is Red Hat's self-service content development model that empowers subject matter experts to share their knowledge by creating training content. This collaborative approach complements our formal development efforts, ensuring that our materials stay timely, relevant, and grounded in real-world experience.
+              </p>
+            </section>
+
+            {/* Audience Toggle */}
             <div className="flex p-1 bg-slate-200 rounded-xl mb-6 gap-1">
               <button 
                 onClick={() => setActiveTab('associates')}
