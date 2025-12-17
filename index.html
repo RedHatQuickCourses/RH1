@@ -464,6 +464,34 @@
                     </div>
                   </div>
                 </div>
+                
+                {/* Helpful Resources Footer */}
+                <section className="mt-12 pt-8 border-t border-slate-200 scroll-animate">
+                  <h3 className="text-sm font-bold text-slate-400 uppercase tracking-widest mb-4">Resources & Support</h3>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <a 
+                      href="https://source.redhat.com/departments/products_and_global_engineering/whats_new_from_products_and_portfolio/open_training_program" 
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-3 p-3 rounded-lg hover:bg-slate-100 transition-colors"
+                    >
+                      <Icon name="Users" size={18} className="text-red-500" />
+                      <span className="text-sm font-medium">Open Training Source Page</span>
+                    </a>
+                    <a 
+                      href="mailto:opentraining@redhat.com" 
+                      className="flex items-center gap-3 p-3 rounded-lg hover:bg-slate-100 transition-colors"
+                    >
+                      <Icon name="MessageCircle" size={18} className="text-red-500" />
+                      <span className="text-sm font-medium">Contact Support</span>
+                    </a>
+                  </div>
+                  <div className="mt-4 p-4 bg-slate-100 rounded-lg">
+                    <p className="text-xs text-slate-600 mb-2">
+                      <strong>Feedback Welcome:</strong> This is early access. Share what worked, what could be improved, and what would make it easier to turn your knowledge into content.
+                    </p>
+                  </div>
+                </section>
               </section>
             ) : (
               <section className="bg-slate-900 text-white rounded-2xl p-8 shadow-md relative overflow-hidden">
@@ -539,36 +567,7 @@
               </div>
             </section>
 
-            {/* Helpful Resources Footer */}
-            <section className="mt-12 pt-8 border-t border-slate-200 scroll-animate">
-              <h3 className="text-sm font-bold text-slate-400 uppercase tracking-widest mb-4">Resources & Support</h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <a 
-                  href="https://source.redhat.com/departments/products_and_global_engineering/whats_new_from_products_and_portfolio/open_training_program" 
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-3 p-3 rounded-lg hover:bg-slate-100 transition-colors"
-                >
-                  <Icon name="Users" size={18} className="text-red-500" />
-                  <span className="text-sm font-medium">Open Training Source Page</span>
-                </a>
-                <a 
-                  href="mailto:opentraining@redhat.com" 
-                  className="flex items-center gap-3 p-3 rounded-lg hover:bg-slate-100 transition-colors"
-                >
-                  <Icon name="MessageCircle" size={18} className="text-red-500" />
-                  <span className="text-sm font-medium">Contact Support</span>
-                </a>
-              </div>
-              <div className="mt-4 p-4 bg-slate-100 rounded-lg">
-                <p className="text-xs text-slate-600 mb-2">
-                  <strong>Feedback Welcome:</strong> This is early access. Share what worked, what could be improved, and what would make it easier to turn your knowledge into content.
-                </p>
-              </div>
-            </section>
-
             <footer className="mt-16 text-center text-slate-400 text-xs">
-              <p>© 2026 Red Hat Open Training Initiative</p>
               <p className="mt-2 font-mono">Build. Share. Revolutionize.</p>
               <p className="mt-4 text-slate-500 italic">
                 "Marc Ewing shared his knowledge and started a revolution. Today, you can do the same."
