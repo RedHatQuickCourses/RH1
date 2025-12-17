@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Red Hat Open Training - Turn your expertise into training courses in minutes with the Rapid Course Builder. Build. Share. Revolutionize.">
+  <title>Red Hat Open Training - Rapid Course Builder</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script crossorigin src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <style>
+    /* Custom styles for icon fills */
+    .icon-fill {
+      fill: currentColor;
+    }
+    
+    /* Smooth scroll behavior */
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    /* Animated gradient background */
+    @keyframes gradient-shift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+    
+    .animated-gradient {
+      background: linear-gradient(-45deg, #EE0000, #CC0000, #FF3333, #EE0000);
+      background-size: 400% 400%;
+      animation: gradient-shift 15s ease infinite;
+    }
+    
+    /* Floating animation for icons */
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+    
+    .float-animation {
+      animation: float 3s ease-in-out infinite;
+    }
+    
+    /* Pulse animation */
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(238, 0, 0, 0.7); }
+      50% { box-shadow: 0 0 0 10px rgba(238, 0, 0, 0); }
+    }
+    
+    .pulse-glow {
+      animation: pulse-glow 2s infinite;
+    }
+    
+    /* Fade in on scroll */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .fade-in-up {
+      animation: fadeInUp 0.6s ease-out;
+    }
+    
+    /* Shimmer effect */
+    @keyframes shimmer {
+      0% { background-position: -1000px 0; }
+      100% { background-position: 1000px 0; }
+    }
+    
+    .shimmer {
+      background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.2) 50%,
+        rgba(255, 255, 255, 0) 100%
+      );
+      background-size: 1000px 100%;
+      animation: shimmer 2s infinite;
+    }
+    
+    /* Interactive card hover */
+    .interactive-card {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      transform-style: preserve-3d;
+    }
+    
+    .interactive-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    }
+    
+    /* Sparkle particles */
+    @keyframes sparkle {
+      0%, 100% {
+        opacity: 0;
+        transform: scale(0) rotate(0deg);
+      }
+      50% {
+        opacity: 1;
+        transform: scale(1) rotate(180deg);
+      }
+    }
+    
+    .sparkle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: white;
+      border-radius: 50%;
+      animation: sparkle 2s infinite;
+    }
+    
+    /* Number counter animation */
+    @keyframes countUp {
+      from { opacity: 0; transform: scale(0.5); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    
+    .count-animate {
+      animation: countUp 0.5s ease-out;
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState, useEffect, useRef } = React;
+
+    const App = () => {
+      const [activeTab, setActiveTab] = useState('associates');
+      const [courseCount, setCourseCount] = useState(0);
+      const [isVisible, setIsVisible] = useState(false);
+      const sectionRef = useRef(null);
+      
+      // Animated counter effect
+      useEffect(() => {
+        const targetCount = 2; // Update this with actual course count
+        const duration = 2000;
+        const steps = 60;
+        const increment = targetCount / steps;
+        const stepDuration = duration / steps;
+        
+        let current = 0;
+        const timer = setInterval(() => {
+          current += increment;
+          if (current >= targetCount) {
+            setCourseCount(targetCount);
+            clearInterval(timer);
+          } else {
+            setCourseCount(Math.floor(current));
+          }
+        }, stepDuration);
+        
+        return () => clearInterval(timer);
+      }, []);
+      
+      // Intersection Observer for scroll animations
+      useEffect(() => {
+        // Fallback for browsers without IntersectionObserver
+        if (typeof IntersectionObserver === 'undefined') {
+          const elements = document.querySelectorAll('.scroll-animate');
+          elements.forEach((el) => el.classList.add('fade-in-up'));
+          return;
+        }
+        
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('fade-in-up');
+                setIsVisible(true);
+              }
+            });
+          },
+          { threshold: 0.1 }
+        );
+        
+        const elements = document.querySelectorAll('.scroll-animate');
+        elements.forEach((el) => observer.observe(el));
+        
+        return () => observer.disconnect();
+      }, []);
+
+      const publishedCourses = [
+        {
+          title: "RHOSP 17.1 to 18 Migration",
+          desc: "Learn the core transition steps for OpenStack environments.",
+          link: "https://redhatquickcourses.github.io/rhosp17.1-to-18/rhosp17.1-to-18/1/lab_environment/index.html"
+        },
+        {
+          title: "Ansible Automation Platform 2.4",
+          desc: "Subject matter expertise on the latest automation controller features.",
+          link: "#"
+        }
+      ];
+
+      // Icon component with inline SVG icons
+      const Icon = ({ name, size = 24, className = "", fill = false }) => {
+        const icons = {
+          Zap: <svg width={size} height={size} viewBox="0 0 24 24" fill={fill ? "currentColor" : "none"} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>,
+          FileText: <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>,
+          Rocket: <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>,
+          Sparkles: <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>,
+          BookOpen: <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>,
+          ExternalLink: <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>,
+          MessageCircle: <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>,
+          PlayCircle: <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>,
+          Users: <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>,
+          Mail: <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        };
+        return icons[name] || null;
+      };
+
+      return (
+        <div className="min-h-screen bg-slate-50 font-sans text-slate-900 pb-12">
+          {/* Red Hat Branded Header with animated gradient */}
+          <header className="animated-gradient text-white py-8 px-6 text-center shadow-lg relative overflow-hidden">
+            {/* Sparkle particles */}
+            {[...Array(6)].map((_, i) => (
+              <div
+                key={i}
+                className="sparkle"
+                style={{
+                  left: `${Math.random() * 100}%`,
+                  top: `${Math.random() * 100}%`,
+                  animationDelay: `${i * 0.3}s`
+                }}
+              />
+            ))}
+            <div className="max-w-2xl mx-auto relative z-10">
+              <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-2 fade-in-up">
+                Are you "the person in the red hat?"
+              </h1>
+              <p className="text-red-100 italic text-lg opacity-90 fade-in-up mb-3" style={{ animationDelay: '0.2s' }}>
+                "Marc Ewing shared his knowledge and started a revolution. Today, you can do the same."
+              </p>
+              <p className="text-red-50 text-base font-semibold fade-in-up" style={{ animationDelay: '0.4s' }}>
+                From In-Demand to On-Demand
+              </p>
+            </div>
+          </header>
+
+          <main className="max-w-2xl mx-auto px-4 -mt-6">
+            {/* Rapid Course Builder Intro */}
+            <section className="bg-white rounded-2xl shadow-xl p-6 mb-8 border border-slate-100 scroll-animate interactive-card">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="bg-red-50 p-2 rounded-lg text-[#EE0000] float-animation">
+                  <Icon name="Zap" size={24} fill={true} />
+                </div>
+                <h2 className="text-xl font-bold">Rapid Course Builder (RCB)</h2>
+              </div>
+              <div className="mb-4">
+                <span className="inline-block bg-yellow-100 text-yellow-800 text-xs font-semibold px-3 py-1 rounded-full mb-3">
+                  🚀 Early Access - Pilot Program
+                </span>
+              </div>
+              <p className="text-slate-600 mb-4 leading-relaxed">
+                The RCB is your AI drafting assistant. It handles the "heavy lifting"—building structure and drafting content—so you can focus on technical accuracy and real-world insights.
+              </p>
+              <p className="text-sm text-slate-500 mb-6 italic">
+                <strong>Note:</strong> This is early access software. You may encounter bugs. If the UI gets stuck, try refreshing. Built with Streamlit—use your Kerberos ID to login (no password required).
+              </p>
+              
+              <div className="bg-blue-50 border-l-4 border-blue-400 p-4 mb-6">
+                <p className="text-sm text-blue-800 font-semibold mb-1">📋 First Step Required:</p>
+                <p className="text-sm text-blue-700">Submit your training idea using the form below to get started.</p>
+              </div>
+              
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <a 
+                  href="https://red.ht/open-training-request" 
+                  className="flex items-center justify-center gap-2 bg-[#EE0000] hover:bg-[#CC0000] text-white font-bold py-4 px-6 rounded-xl transition-all shadow-md active:scale-95 pulse-glow hover:scale-105 hover:shadow-xl relative overflow-hidden group"
+                >
+                  <span className="absolute inset-0 shimmer"></span>
+                  <Icon name="FileText" size={20} className="relative z-10 group-hover:rotate-12 transition-transform" />
+                  <span className="relative z-10">Share a Training Idea</span>
+                </a>
+                <a 
+                  href="http://72.32.49.189:8501/" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center gap-2 bg-slate-900 hover:bg-black text-white font-bold py-4 px-6 rounded-xl transition-all shadow-md active:scale-95 hover:scale-105 hover:shadow-xl group"
+                >
+                  <Icon name="Rocket" size={20} className="group-hover:translate-x-1 transition-transform" />
+                  Jump into RCB
+                </a>
+              </div>
+              <p className="text-xs text-slate-500 mt-3 text-center">
+                After submitting the form, you can jump right into RCB or wait for our team to reach out.
+              </p>
+            </section>
+
+            {/* Audience Toggle */}
+            <div className="flex p-1 bg-slate-200 rounded-xl mb-6">
+              <button 
+                onClick={() => setActiveTab('associates')}
+                className={`flex-1 py-3 px-4 rounded-lg font-bold transition-all ${activeTab === 'associates' ? 'bg-white shadow-sm text-[#EE0000]' : 'text-slate-600'}`}
+              >
+                For Associates
+              </button>
+              <button 
+                onClick={() => setActiveTab('partners')}
+                className={`flex-1 py-3 px-4 rounded-lg font-bold transition-all ${activeTab === 'partners' ? 'bg-white shadow-sm text-[#EE0000]' : 'text-slate-600'}`}
+              >
+                For Partners
+              </button>
+            </div>
+
+            {/* Dynamic Content Based on Tab */}
+            {activeTab === 'associates' ? (
+              <section className="space-y-6 scroll-animate">
+                <div className="bg-white rounded-2xl p-6 shadow-md border border-slate-100 interactive-card">
+                  <h3 className="text-lg font-bold mb-2 flex items-center gap-2">
+                    <Icon name="Sparkles" size={20} className="text-yellow-500 float-animation" />
+                    How to be the "person in the red hat"
+                  </h3>
+                  <p className="text-sm text-slate-600 mb-4">Follow this process to share your expertise:</p>
+                  <div className="space-y-4">
+                    {[
+                      { step: 1, title: "Submit Your Idea", desc: "Fill out the 'Share a Training Idea or Knowledge Gap' form. This gets your project in our queue." },
+                      { step: 2, title: "Choose Your Path", desc: "Jump right into RCB (use Kerberos ID, no password) or wait for our team to reach out for guidance." },
+                      { step: 3, title: "Build Your Course", desc: "Use RCB to create your repo. Format: test-topic-KerberosID (e.g., test-ansible-basics-ashishks)" },
+                      { step: 4, title: "Review & Publish", desc: "Our team reviews your draft, handles publishing to the LMS, and helps you claim GiveBack points." }
+                    ].map((item, idx) => (
+                      <div key={item.step} className="flex gap-4 group hover:bg-red-50 p-3 rounded-lg transition-all cursor-default" style={{ animationDelay: `${idx * 0.1}s` }}>
+                        <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-red-100 to-red-200 text-[#EE0000] flex items-center justify-center font-bold text-sm group-hover:scale-110 group-hover:shadow-md transition-all">
+                          {item.step}
+                        </div>
+                        <div>
+                          <h4 className="font-bold text-slate-800 group-hover:text-[#EE0000] transition-colors">{item.title}</h4>
+                          <p className="text-sm text-slate-600">{item.desc}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                
+                <div className="bg-gradient-to-br from-red-50 to-orange-50 rounded-2xl p-6 shadow-md border border-red-100 interactive-card">
+                  <h3 className="text-lg font-bold mb-4 flex items-center gap-2 text-[#EE0000]">
+                    <Icon name="Sparkles" size={20} className="text-yellow-500" />
+                    Why You Should Do This
+                  </h3>
+                  <div className="space-y-3">
+                    <div className="flex items-start gap-3">
+                      <div className="text-[#EE0000] mt-1">✓</div>
+                      <div>
+                        <p className="font-semibold text-slate-800">Scale Your Impact</p>
+                        <p className="text-sm text-slate-600">Address common customer pain points and fill critical knowledge gaps.</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <div className="text-[#EE0000] mt-1">✓</div>
+                      <div>
+                        <p className="font-semibold text-slate-800">Get Rewarded</p>
+                        <p className="text-sm text-slate-600">Earn GiveBack points for developing new courses or updating existing ones.</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <div className="text-[#EE0000] mt-1">✓</div>
+                      <div>
+                        <p className="font-semibold text-slate-800">From In-Demand to On-Demand</p>
+                        <p className="text-sm text-slate-600">Turn your expertise into a lasting resource available to everyone, anytime.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="bg-white rounded-2xl p-6 shadow-md border border-slate-100 interactive-card">
+                  <h3 className="text-lg font-bold mb-4 flex items-center gap-2">
+                    <Icon name="Rocket" size={20} className="text-[#EE0000]" />
+                    Coming Soon: Enhanced Features
+                  </h3>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+                    <div className="flex items-start gap-2">
+                      <span className="text-slate-400">•</span>
+                      <span className="text-slate-600">Image generator for architecture diagrams</span>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <span className="text-slate-400">•</span>
+                      <span className="text-slate-600">Video creation from slide decks</span>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <span className="text-slate-400">•</span>
+                      <span className="text-slate-600">Demo video recorder with AI voiceovers</span>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <span className="text-slate-400">•</span>
+                      <span className="text-slate-600">Chat interface for editing assistance</span>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            ) : (
+              <section className="bg-slate-900 text-white rounded-2xl p-8 shadow-md relative overflow-hidden">
+                <div className="relative z-10">
+                  <h3 className="text-2xl font-bold mb-4">Need Guidance or Support?</h3>
+                  <p className="text-slate-300 mb-6 leading-relaxed">
+                    Have a vision for a course but need help? Our Product & Technical Learning (PTL) team is here to support you with content strategy, technical review, and publishing.
+                  </p>
+                  <div className="space-y-3 mb-6">
+                    <a 
+                      href="https://red.ht/open-training-request" 
+                      className="block w-full bg-[#EE0000] hover:bg-[#CC0000] text-white font-bold py-4 px-6 rounded-xl flex items-center justify-center gap-2 transition-all active:scale-95"
+                    >
+                      <Icon name="FileText" size={20} />
+                      Submit Training Idea Form
+                    </a>
+                    <a 
+                      href="mailto:opentraining@redhat.com" 
+                      className="block w-full bg-slate-700 hover:bg-slate-600 text-white font-bold py-3 px-6 rounded-xl flex items-center justify-center gap-2 transition-all"
+                    >
+                      <Icon name="Mail" size={20} />
+                      Email: opentraining@redhat.com
+                    </a>
+                  </div>
+                  <div className="bg-slate-800/50 rounded-lg p-4 mt-4">
+                    <p className="text-xs text-slate-300 mb-2 font-semibold">💬 Join our Slack channel:</p>
+                    <p className="text-sm text-white font-mono">#help-open-training</p>
+                  </div>
+                  <p className="text-xs text-slate-400 mt-4 text-center italic">
+                    For bug reports or technical support, contact Ashish Shah (ashishks@redhat.com)
+                  </p>
+                </div>
+                {/* Abstract Background Detail */}
+                <div className="absolute top-0 right-0 -mr-16 -mt-16 w-64 h-64 bg-red-600/10 rounded-full blur-3xl"></div>
+              </section>
+            )}
+
+            {/* Published Courses Gallery */}
+            <section className="mt-10 scroll-animate" ref={sectionRef}>
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="text-xl font-bold flex items-center gap-2">
+                  <Icon name="BookOpen" size={22} className="text-[#EE0000] float-animation" />
+                  Published Courses
+                  <span className="ml-2 text-sm font-normal text-slate-500">
+                    ({courseCount}+ available)
+                  </span>
+                </h2>
+              </div>
+              <div className="grid grid-cols-1 gap-4">
+                {publishedCourses.map((course, idx) => (
+                  <a 
+                    key={idx} 
+                    href={course.link} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="group bg-white p-5 rounded-xl border border-slate-200 hover:border-red-300 hover:shadow-lg transition-all block interactive-card"
+                    style={{ animationDelay: `${idx * 0.15}s` }}
+                  >
+                    <div className="flex justify-between items-start">
+                      <div className="flex-1">
+                        <h4 className="font-bold text-slate-900 group-hover:text-[#EE0000] transition-colors flex items-center gap-2">
+                          {course.title}
+                          <span className="text-xs font-normal text-slate-400 group-hover:text-red-400 transition-colors">→</span>
+                        </h4>
+                        <p className="text-sm text-slate-500 mt-1 group-hover:text-slate-700 transition-colors">{course.desc}</p>
+                      </div>
+                      <Icon name="ExternalLink" size={16} className="text-slate-400 group-hover:text-[#EE0000] group-hover:scale-125 transition-all ml-2" />
+                    </div>
+                  </a>
+                ))}
+              </div>
+            </section>
+
+            {/* Helpful Resources Footer */}
+            <section className="mt-12 pt-8 border-t border-slate-200 scroll-animate">
+              <h3 className="text-sm font-bold text-slate-400 uppercase tracking-widest mb-4">Resources & Support</h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <a 
+                  href="https://source.redhat.com/departments/products_and_global_engineering/whats_new_from_products_and_portfolio/open_training_program" 
+                  className="flex items-center gap-3 p-3 rounded-lg hover:bg-slate-100 transition-colors"
+                >
+                  <Icon name="Users" size={18} className="text-red-500" />
+                  <span className="text-sm font-medium">Open Training Source Page</span>
+                </a>
+                <a 
+                  href="mailto:opentraining@redhat.com" 
+                  className="flex items-center gap-3 p-3 rounded-lg hover:bg-slate-100 transition-colors"
+                >
+                  <Icon name="MessageCircle" size={18} className="text-red-500" />
+                  <span className="text-sm font-medium">Contact Support</span>
+                </a>
+              </div>
+              <div className="mt-4 p-4 bg-slate-100 rounded-lg">
+                <p className="text-xs text-slate-600 mb-2">
+                  <strong>Feedback Welcome:</strong> This is early access. Share what worked, what could be improved, and what would make it easier to turn your knowledge into content.
+                </p>
+              </div>
+            </section>
+
+            <footer className="mt-16 text-center text-slate-400 text-xs">
+              <p>© 2026 Red Hat Open Training Initiative</p>
+              <p className="mt-2 font-mono">Build. Share. Revolutionize.</p>
+              <p className="mt-4 text-slate-500 italic">
+                "Marc Ewing shared his knowledge and started a revolution. Today, you can do the same."
+              </p>
+            </footer>
+          </main>
+        </div>
+      );
+    };
+
+    ReactDOM.render(<App />, document.getElementById('root'));
+  </script>
+</body>
+</html>
