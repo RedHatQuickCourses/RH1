@@ -142,7 +142,7 @@
       
       // Animated counter effect
       useEffect(() => {
-        const targetCount = 2; // Update this with actual course count
+        const targetCount = 7; // Update this with actual course count
         const duration = 2000;
         const steps = 60;
         const increment = targetCount / steps;
@@ -191,14 +191,46 @@
 
       const publishedCourses = [
         {
-          title: "RHOSP 17.1 to 18 Migration",
-          desc: "Learn the core transition steps for OpenStack environments.",
-          link: "https://redhatquickcourses.github.io/rhosp17.1-to-18/rhosp17.1-to-18/1/lab_environment/index.html"
+          title: "Leapp Upgrade with Red Hat Satellite 6",
+          contributors: "Soham Majumdar, Manu Sunil",
+          associateLink: "https://training-lms.redhat.com/sso/saml/auth/rhlpint?RelayState=deeplinkoffering%3D74305503",
+          partnerLink: "https://training-lms.redhat.com/sso/saml/auth/rhopen?RelayState=deeplinkoffering%3D74405084"
         },
         {
-          title: "Ansible Automation Platform 2.4",
-          desc: "Subject matter expertise on the latest automation controller features.",
-          link: "#"
+          title: "Minor upgrade of Red Hat Satellite 6.15 to 6.15.z",
+          contributors: "Soham Majumdar, Manu Sunil",
+          associateLink: "https://training-lms.redhat.com/sso/saml/auth/rhlpint?RelayState=deeplinkoffering%3D74347503",
+          partnerLink: "https://training-lms.redhat.com/sso/saml/auth/rhopen?RelayState=deeplinkoffering%3D74405085"
+        },
+        {
+          title: "Fixing httpd Service on Red Hat Satellite 6",
+          contributors: "Soham Majumdar, Manu Sunil",
+          associateLink: "https://training-lms.redhat.com/sso/saml/auth/rhlpint?RelayState=deeplinkoffering%3D74347502",
+          partnerLink: "https://training-lms.redhat.com/sso/saml/auth/rhopen?RelayState=deeplinkoffering%3D74405083"
+        },
+        {
+          title: "Fixing and Optimizing Performance on Red Hat Satellite 6",
+          contributors: "Soham Majumdar, Manu Sunil",
+          associateLink: "https://training-lms.redhat.com/sso/saml/auth/rhlpint?RelayState=deeplinkoffering%3D74347501",
+          partnerLink: "https://training-lms.redhat.com/sso/saml/auth/rhopen?RelayState=deeplinkoffering%3D74405081"
+        },
+        {
+          title: "Configuring tftp on Red Hat Satellite 6",
+          contributors: "Soham Majumdar, Manu Sunil",
+          associateLink: "https://training-lms.redhat.com/sso/saml/auth/rhlpint?RelayState=deeplinkoffering%3D74347498",
+          partnerLink: "https://training-lms.redhat.com/sso/saml/auth/rhopen?RelayState=deeplinkoffering%3D74405080"
+        },
+        {
+          title: "Troubleshooting instance connectivity issue in Red Hat OpenStack Platform 18 (BFX028) v18.0",
+          contributors: "Slawek Kaplonski",
+          associateLink: "https://training-lms.redhat.com/sso/saml/auth/rhlpint?RelayState=deeplinkoffering%3D82263488",
+          partnerLink: "https://training-lms.redhat.com/sso/saml/auth/rhopen?RelayState=deeplinkoffering%3D82870780"
+        },
+        {
+          title: "Hosted Control Planes on a Single Bare Metal Node",
+          contributors: "Sadique Puthen Peedikayil, Praveen Thakur, Ami Desai",
+          associateLink: "https://training-lms.redhat.com/sso/saml/auth/rhlpint?RelayState=deeplinkoffering%3D82958185",
+          partnerLink: "https://training-lms.redhat.com/sso/saml/auth/rhopen?RelayState=deeplinkoffering%3D82958309"
         }
       ];
 
@@ -249,56 +281,7 @@
           </header>
 
           <main className="max-w-2xl mx-auto px-4 -mt-6">
-            {/* Rapid Course Builder Intro */}
-            <section className="bg-white rounded-2xl shadow-xl p-6 mb-8 border border-slate-100 scroll-animate interactive-card">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="bg-red-50 p-2 rounded-lg text-[#EE0000] float-animation">
-                  <Icon name="Zap" size={24} fill={true} />
-                </div>
-                <h2 className="text-xl font-bold">Rapid Course Builder (RCB)</h2>
-              </div>
-              <div className="mb-4">
-                <span className="inline-block bg-yellow-100 text-yellow-800 text-xs font-semibold px-3 py-1 rounded-full mb-3">
-                  🚀 Early Access - Pilot Program
-                </span>
-              </div>
-              <p className="text-slate-600 mb-4 leading-relaxed">
-                The RCB is your AI drafting assistant. It handles the "heavy lifting"—building structure and drafting content—so you can focus on technical accuracy and real-world insights.
-              </p>
-              <p className="text-sm text-slate-500 mb-6 italic">
-                <strong>Note:</strong> This is early access software. You may encounter bugs. If the UI gets stuck, try refreshing. Built with Streamlit—use your Kerberos ID to login (no password required).
-              </p>
-              
-              <div className="bg-blue-50 border-l-4 border-blue-400 p-4 mb-6">
-                <p className="text-sm text-blue-800 font-semibold mb-1">📋 First Step Required:</p>
-                <p className="text-sm text-blue-700">Submit your training idea using the form below to get started.</p>
-              </div>
-              
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <a 
-                  href="https://red.ht/open-training-request" 
-                  className="flex items-center justify-center gap-2 bg-[#EE0000] hover:bg-[#CC0000] text-white font-bold py-4 px-6 rounded-xl transition-all shadow-md active:scale-95 pulse-glow hover:scale-105 hover:shadow-xl relative overflow-hidden group"
-                >
-                  <span className="absolute inset-0 shimmer"></span>
-                  <Icon name="FileText" size={20} className="relative z-10 group-hover:rotate-12 transition-transform" />
-                  <span className="relative z-10">Share a Training Idea</span>
-                </a>
-                <a 
-                  href="http://72.32.49.189:8501/" 
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 bg-slate-900 hover:bg-black text-white font-bold py-4 px-6 rounded-xl transition-all shadow-md active:scale-95 hover:scale-105 hover:shadow-xl group"
-                >
-                  <Icon name="Rocket" size={20} className="group-hover:translate-x-1 transition-transform" />
-                  Jump into RCB
-                </a>
-              </div>
-              <p className="text-xs text-slate-500 mt-3 text-center">
-                After submitting the form, you can jump right into RCB or wait for our team to reach out.
-              </p>
-            </section>
-
-            {/* Audience Toggle */}
+            {/* Audience Toggle - Moved to Top */}
             <div className="flex p-1 bg-slate-200 rounded-xl mb-6">
               <button 
                 onClick={() => setActiveTab('associates')}
@@ -317,6 +300,54 @@
             {/* Dynamic Content Based on Tab */}
             {activeTab === 'associates' ? (
               <section className="space-y-6 scroll-animate">
+                {/* Rapid Course Builder Intro - Moved to Associates Tab */}
+                <section className="bg-white rounded-2xl shadow-xl p-6 border border-slate-100 scroll-animate interactive-card">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="bg-red-50 p-2 rounded-lg text-[#EE0000] float-animation">
+                      <Icon name="Zap" size={24} fill={true} />
+                    </div>
+                    <h2 className="text-xl font-bold">Rapid Course Builder (RCB)</h2>
+                  </div>
+                  <div className="mb-4">
+                    <span className="inline-block bg-yellow-100 text-yellow-800 text-xs font-semibold px-3 py-1 rounded-full mb-3">
+                      🚀 Early Access - Pilot Program
+                    </span>
+                  </div>
+                  <p className="text-slate-600 mb-4 leading-relaxed">
+                    The RCB is your AI drafting assistant. It handles the "heavy lifting"—building structure and drafting content—so you can focus on technical accuracy and real-world insights.
+                  </p>
+                  <p className="text-sm text-slate-500 mb-6 italic">
+                    <strong>Note:</strong> This is early access software. You may encounter bugs. If the UI gets stuck, try refreshing. Built with Streamlit—use your Kerberos ID to login (no password required).
+                  </p>
+                  
+                  <div className="bg-blue-50 border-l-4 border-blue-400 p-4 mb-6">
+                    <p className="text-sm text-blue-800 font-semibold mb-1">📋 First Step Required:</p>
+                    <p className="text-sm text-blue-700">Submit your training idea using the form below to get started.</p>
+                  </div>
+                  
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <a 
+                      href="https://red.ht/open-training-request" 
+                      className="flex items-center justify-center gap-2 bg-[#EE0000] hover:bg-[#CC0000] text-white font-bold py-4 px-6 rounded-xl transition-all shadow-md active:scale-95 pulse-glow hover:scale-105 hover:shadow-xl relative overflow-hidden group"
+                    >
+                      <span className="absolute inset-0 shimmer"></span>
+                      <Icon name="FileText" size={20} className="relative z-10 group-hover:rotate-12 transition-transform" />
+                      <span className="relative z-10">Share a Training Idea</span>
+                    </a>
+                    <a 
+                      href="http://72.32.49.189:8501/" 
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center gap-2 bg-slate-900 hover:bg-black text-white font-bold py-4 px-6 rounded-xl transition-all shadow-md active:scale-95 hover:scale-105 hover:shadow-xl group"
+                    >
+                      <Icon name="Rocket" size={20} className="group-hover:translate-x-1 transition-transform" />
+                      Jump into RCB
+                    </a>
+                  </div>
+                  <p className="text-xs text-slate-500 mt-3 text-center">
+                    After submitting the form, you can jump right into RCB or wait for our team to reach out.
+                  </p>
+                </section>
                 <div className="bg-white rounded-2xl p-6 shadow-md border border-slate-100 interactive-card">
                   <h3 className="text-lg font-bold mb-2 flex items-center gap-2">
                     <Icon name="Sparkles" size={20} className="text-yellow-500 float-animation" />
@@ -401,9 +432,12 @@
             ) : (
               <section className="bg-slate-900 text-white rounded-2xl p-8 shadow-md relative overflow-hidden">
                 <div className="relative z-10">
-                  <h3 className="text-2xl font-bold mb-4">Need Guidance or Support?</h3>
+                  <h3 className="text-2xl font-bold mb-4">Partner with a Red Hatter</h3>
+                  <p className="text-slate-300 mb-6 leading-relaxed text-lg">
+                    Please share your ideas or connect with a Red Hatter to develop content!
+                  </p>
                   <p className="text-slate-300 mb-6 leading-relaxed">
-                    Have a vision for a course but need help? Our Product & Technical Learning (PTL) team is here to support you with content strategy, technical review, and publishing.
+                    Have a vision for a course but need a technical collaborator? Connect with our Product & Technical Learning (PTL) team to co-develop high-impact training.
                   </p>
                   <div className="space-y-3 mb-6">
                     <a 
@@ -411,22 +445,18 @@
                       className="block w-full bg-[#EE0000] hover:bg-[#CC0000] text-white font-bold py-4 px-6 rounded-xl flex items-center justify-center gap-2 transition-all active:scale-95"
                     >
                       <Icon name="FileText" size={20} />
-                      Submit Training Idea Form
+                      Share a Training Idea
                     </a>
                     <a 
                       href="mailto:opentraining@redhat.com" 
                       className="block w-full bg-slate-700 hover:bg-slate-600 text-white font-bold py-3 px-6 rounded-xl flex items-center justify-center gap-2 transition-all"
                     >
-                      <Icon name="Mail" size={20} />
-                      Email: opentraining@redhat.com
+                      <Icon name="MessageCircle" size={20} />
+                      Connect to Collaborate
                     </a>
                   </div>
-                  <div className="bg-slate-800/50 rounded-lg p-4 mt-4">
-                    <p className="text-xs text-slate-300 mb-2 font-semibold">💬 Join our Slack channel:</p>
-                    <p className="text-sm text-white font-mono">#help-open-training</p>
-                  </div>
                   <p className="text-xs text-slate-400 mt-4 text-center italic">
-                    For bug reports or technical support, contact Ashish Shah (ashishks@redhat.com)
+                    Get guidance on content strategy, technical review, and global publishing.
                   </p>
                 </div>
                 {/* Abstract Background Detail */}
@@ -447,25 +477,39 @@
               </div>
               <div className="grid grid-cols-1 gap-4">
                 {publishedCourses.map((course, idx) => (
-                  <a 
+                  <div 
                     key={idx} 
-                    href={course.link} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="group bg-white p-5 rounded-xl border border-slate-200 hover:border-red-300 hover:shadow-lg transition-all block interactive-card"
+                    className="group bg-white p-5 rounded-xl border border-slate-200 hover:border-red-300 hover:shadow-lg transition-all interactive-card"
                     style={{ animationDelay: `${idx * 0.15}s` }}
                   >
-                    <div className="flex justify-between items-start">
-                      <div className="flex-1">
-                        <h4 className="font-bold text-slate-900 group-hover:text-[#EE0000] transition-colors flex items-center gap-2">
-                          {course.title}
-                          <span className="text-xs font-normal text-slate-400 group-hover:text-red-400 transition-colors">→</span>
-                        </h4>
-                        <p className="text-sm text-slate-500 mt-1 group-hover:text-slate-700 transition-colors">{course.desc}</p>
-                      </div>
-                      <Icon name="ExternalLink" size={16} className="text-slate-400 group-hover:text-[#EE0000] group-hover:scale-125 transition-all ml-2" />
+                    <div className="mb-3">
+                      <h4 className="font-bold text-slate-900 group-hover:text-[#EE0000] transition-colors">
+                        {course.title}
+                      </h4>
+                      {course.contributors && (
+                        <p className="text-xs text-slate-500 mt-1">Contributors: {course.contributors}</p>
+                      )}
                     </div>
-                  </a>
+                    <div className="flex items-center justify-center gap-4 pt-3 border-t border-slate-100">
+                      <a 
+                        href={course.associateLink} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="text-sm font-medium text-[#EE0000] hover:text-[#CC0000] hover:underline transition-colors"
+                      >
+                        Associate
+                      </a>
+                      <span className="text-slate-300">|</span>
+                      <a 
+                        href={course.partnerLink} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="text-sm font-medium text-[#EE0000] hover:text-[#CC0000] hover:underline transition-colors"
+                      >
+                        Partner
+                      </a>
+                    </div>
+                  </div>
                 ))}
               </div>
             </section>
