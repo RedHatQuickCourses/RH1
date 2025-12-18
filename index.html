@@ -5,11 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Red Hat Open Training - Turn your expertise into training courses in minutes with the Rapid Course Builder. Build. Share. Revolutionize.">
   <title>Red Hat Open Training - Rapid Course Builder</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@400;500;600;700;900&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <script crossorigin src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
   <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <style>
+    /* Red Hat Display font */
+    * {
+      font-family: 'Red Hat Display', sans-serif;
+    }
+    
     /* Custom styles for icon fills */
     .icon-fill {
       fill: currentColor;
@@ -388,7 +396,7 @@
       };
 
       return (
-        <div className="min-h-screen bg-slate-50 font-sans text-slate-900 pb-12">
+        <div className="min-h-screen bg-slate-50 text-slate-900 pb-12" style={{ fontFamily: "'Red Hat Display', sans-serif" }}>
           {/* Red Hat Branded Header with animated gradient */}
           <header className="animated-gradient text-white py-8 px-6 text-center shadow-lg relative overflow-hidden">
             {/* Sparkle particles */}
@@ -509,6 +517,32 @@
                     After submitting the form, you can jump right into RCB or wait for our team to reach out.
                   </p>
                 </section>
+                
+                <div className="bg-white rounded-2xl p-6 shadow-md border border-slate-100 interactive-card">
+                  <h3 className="text-lg font-bold mb-4 flex items-center gap-2">
+                    <Icon name="Rocket" size={20} className="text-[#EE0000]" />
+                    Key Features in RCB
+                  </h3>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+                    <div className="flex items-start gap-2">
+                      <span className="text-slate-400">•</span>
+                      <span className="text-slate-600">Initial content drafting (Antora AsciiDoc based training)</span>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <span className="text-slate-400">•</span>
+                      <span className="text-slate-600">GitHub repository creation</span>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <span className="text-slate-400">•</span>
+                      <span className="text-slate-600">Image creation</span>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <span className="text-slate-400">•</span>
+                      <span className="text-slate-600">Audio and video generation</span>
+                    </div>
+                  </div>
+                </div>
+                
                 <div className="bg-white rounded-2xl p-6 shadow-md border border-slate-100 interactive-card">
                   <h3 className="text-lg font-bold mb-2 flex items-center gap-2">
                     <Icon name="Sparkles" size={20} className="text-yellow-500 float-animation" />
@@ -517,10 +551,10 @@
                   <p className="text-sm text-slate-600 mb-4">Follow this process to share your expertise:</p>
                   <div className="space-y-4">
                     {[
-                      { step: 1, title: "Submit Your Idea", desc: "Fill out the 'Share a Training Idea or Knowledge Gap' form. This gets your project in our queue." },
-                      { step: 2, title: "Choose Your Path", desc: "Jump right into RCB (use Kerberos ID, no password) or wait for our team to reach out for guidance." },
-                      { step: 3, title: "Build Your Course", desc: "Use RCB to create your repo. Format: test-topic-KerberosID (e.g., test-ansible-basics-ashishks)" },
-                      { step: 4, title: "Review & Publish", desc: "Our team reviews your draft, handles publishing to the LMS, and helps you claim GiveBack points." }
+                      { step: 1, title: "Submit Your Idea", desc: "Fill out the ", descLink: "https://red.ht/open-training-request", descLinkText: "'Share a Training Idea or Knowledge Gap' form", descAfter: ". This gets your project in our queue." },
+                      { step: 2, title: "Choose Your Path", desc: "Jump right into ", descLink: "http://72.32.49.189:8501/", descLinkText: "RCB", descAfter: " (use Kerberos ID, no password) or wait for our team to reach out for guidance." },
+                    { step: 3, title: "Build Your Course", desc: "Use RCB to create your repo. Format: test-topic-KerberosID (e.g., test-ansible-basics-ashishks)", descLink: null },
+                    { step: 4, title: "Review & Publish", desc: "Our team reviews your draft, handles publishing to the LMS, and helps you claim GiveBack points.", descLink: null }
                     ].map((item, idx) => (
                       <div key={item.step} className="flex gap-4 group hover:bg-red-50 p-3 rounded-lg transition-all cursor-default" style={{ animationDelay: `${idx * 0.1}s` }}>
                         <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-red-100 to-red-200 text-[#EE0000] flex items-center justify-center font-bold text-sm group-hover:scale-110 group-hover:shadow-md transition-all">
@@ -528,7 +562,22 @@
                         </div>
                         <div>
                           <h4 className="font-bold text-slate-800 group-hover:text-[#EE0000] transition-colors">{item.title}</h4>
-                          <p className="text-sm text-slate-600">{item.desc}</p>
+                          <p className="text-sm text-slate-600">
+                            {item.desc}
+                            {item.descLink && (
+                              <>
+                                <a 
+                                  href={item.descLink} 
+                                  target="_blank" 
+                                  rel="noopener noreferrer"
+                                  className="text-[#EE0000] hover:text-[#CC0000] hover:underline font-medium"
+                                >
+                                  {item.descLinkText}
+                                </a>
+                                {item.descAfter}
+                              </>
+                            )}
+                          </p>
                         </div>
                       </div>
                     ))}
@@ -561,31 +610,6 @@
                         <p className="font-semibold text-slate-800">From In-Demand to On-Demand</p>
                         <p className="text-sm text-slate-600">Turn your expertise into a lasting resource available to everyone, anytime.</p>
                       </div>
-                    </div>
-                  </div>
-                </div>
-                
-                <div className="bg-white rounded-2xl p-6 shadow-md border border-slate-100 interactive-card">
-                  <h3 className="text-lg font-bold mb-4 flex items-center gap-2">
-                    <Icon name="Rocket" size={20} className="text-[#EE0000]" />
-                    Key Features in RCB
-                  </h3>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
-                    <div className="flex items-start gap-2">
-                      <span className="text-slate-400">•</span>
-                      <span className="text-slate-600">GitHub repository creation</span>
-                    </div>
-                    <div className="flex items-start gap-2">
-                      <span className="text-slate-400">•</span>
-                      <span className="text-slate-600">Initial content drafting  (Antora AsciiDoc based training)</span>
-                    </div>
-                    <div className="flex items-start gap-2">
-                      <span className="text-slate-400">•</span>
-                      <span className="text-slate-600">Image creation</span>
-                    </div>
-                    <div className="flex items-start gap-2">
-                      <span className="text-slate-400">•</span>
-                      <span className="text-slate-600">Audio and video generation</span>
                     </div>
                   </div>
                 </div>
