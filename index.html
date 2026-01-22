@@ -551,8 +551,8 @@
                   <div className="space-y-4">
                     {[
                       { step: 1, title: "Choose Your Path", desc: "Use RCB with guided onboarding: Fill out the ", descLink: "https://forms.gle/LZUaWeBpvSKYoJmV8", descLinkText: "RCB Expanded Pilot Access form", descAfter: " to join the program. ", altDesc: "Or contribute another way: ", altDescLink: "https://red.ht/open-training-request", altDescLinkText: "Share a Training Idea", altDescAfter: " to submit your idea directly." },
-                      { step: 2, title: "We'll Follow Up After RH1", desc: "For RCB users: We have recorded your interest in RCB. We will follow up with you after Red Hat One to confirm your access and schedule a kickoff call.", descLink: null, altDesc: "For alternative path: Our team will review your training idea and reach out to discuss next steps.", altDescLink: null },
-                    { step: 3, title: "Build Your Course", desc: "For RCB users: During your kickoff call, we'll guide you through RCB and help you create your course. Format: test-topic-KerberosID (e.g., test-ansible-basics-ashishks)", descLink: null, altDesc: "For alternative path: Work with our team to develop your training content using traditional methods.", altDescLink: null },
+                      { step: 2, title: "We'll Follow Up After RH1", desc: "We have recorded your interest in RCB. We will follow up with you after Red Hat One to confirm your access and schedule a kickoff call.", descLink: null, descLabel: "For RCB users:", altDesc: "Our team will review your training idea and reach out to discuss next steps.", altDescLink: null, altDescLabel: "For alternative path:" },
+                    { step: 3, title: "Build Your Course", desc: "During your kickoff call, we'll guide you through RCB and help you create your course. Format: test-topic-KerberosID (e.g., test-ansible-basics-ashishks)", descLink: null, descLabel: "For RCB users:", altDesc: "Work with our team to develop your training content using traditional methods.", altDescLink: null, altDescLabel: "For alternative path:" },
                     { step: 4, title: "Review & Publish", desc: "Our team reviews your draft, handles publishing to the LMS, and helps you claim GiveBack points.", descLink: null }
                     ].map((item, idx) => (
                       <div key={item.step} className="flex gap-4 group hover:bg-red-50 p-3 rounded-lg transition-all cursor-default" style={{ animationDelay: `${idx * 0.1}s` }}>
@@ -561,24 +561,27 @@
                         </div>
                         <div>
                           <h4 className="font-bold text-slate-800 group-hover:text-[#EE0000] transition-colors">{item.title}</h4>
-                          <p className="text-sm text-slate-600">
-                            {item.desc}
-                            {item.descLink && (
-                              <>
-                                <a 
-                                  href={item.descLink} 
-                                  target="_blank" 
-                                  rel="noopener noreferrer"
-                                  className="text-[#EE0000] hover:text-[#CC0000] hover:underline font-medium"
-                                >
-                                  {item.descLinkText}
-                                </a>
-                                {item.descAfter}
-                              </>
-                            )}
+                          <div className="text-sm text-slate-600 space-y-2">
+                            <p>
+                              {item.descLabel && <strong>{item.descLabel} </strong>}
+                              {item.desc}
+                              {item.descLink && (
+                                <>
+                                  <a 
+                                    href={item.descLink} 
+                                    target="_blank" 
+                                    rel="noopener noreferrer"
+                                    className="text-[#EE0000] hover:text-[#CC0000] hover:underline font-medium"
+                                  >
+                                    {item.descLinkText}
+                                  </a>
+                                  {item.descAfter}
+                                </>
+                              )}
+                            </p>
                             {item.altDesc && (
-                              <>
-                                {item.altDesc}
+                              <p>
+                                {item.altDescLabel && <strong>{item.altDescLabel} </strong>}
                                 {item.altDescLink ? (
                                   <>
                                     <a 
@@ -592,11 +595,11 @@
                                     {item.altDescAfter}
                                   </>
                                 ) : (
-                                  item.altDescAfter
+                                  item.altDesc
                                 )}
-                              </>
+                              </p>
                             )}
-                          </p>
+                          </div>
                         </div>
                       </div>
                     ))}
