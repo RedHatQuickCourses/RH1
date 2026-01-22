@@ -561,24 +561,27 @@
                         </div>
                         <div>
                           <h4 className="font-bold text-slate-800 group-hover:text-[#EE0000] transition-colors">{item.title}</h4>
-                          <p className="text-sm text-slate-600">
-                            {item.desc}
-                            {item.descLink && (
-                              <>
-                                <a 
-                                  href={item.descLink} 
-                                  target="_blank" 
-                                  rel="noopener noreferrer"
-                                  className="text-[#EE0000] hover:text-[#CC0000] hover:underline font-medium"
-                                >
-                                  {item.descLinkText}
-                                </a>
-                                {item.descAfter}
-                              </>
-                            )}
+                          <div className="text-sm text-slate-600 space-y-2">
+                            <p>
+                              {item.descLabel && <strong>{item.descLabel} </strong>}
+                              {item.desc}
+                              {item.descLink && (
+                                <>
+                                  <a 
+                                    href={item.descLink} 
+                                    target="_blank" 
+                                    rel="noopener noreferrer"
+                                    className="text-[#EE0000] hover:text-[#CC0000] hover:underline font-medium"
+                                  >
+                                    {item.descLinkText}
+                                  </a>
+                                  {item.descAfter}
+                                </>
+                              )}
+                            </p>
                             {item.altDesc && (
-                              <>
-                                {item.altDesc}
+                              <p>
+                                {item.altDescLabel && <strong>{item.altDescLabel} </strong>}
                                 {item.altDescLink ? (
                                   <>
                                     <a 
@@ -592,11 +595,11 @@
                                     {item.altDescAfter}
                                   </>
                                 ) : (
-                                  item.altDescAfter
+                                  item.altDesc
                                 )}
-                              </>
+                              </p>
                             )}
-                          </p>
+                          </div>
                         </div>
                       </div>
                     ))}
