@@ -579,7 +579,7 @@
                                 </>
                               )}
                             </p>
-                            {item.altDesc && (
+                            {(item.altDesc || item.altDescLink || item.altDescLabel) && (
                               <p>
                                 {item.altDescLabel && <strong>{item.altDescLabel} </strong>}
                                 {item.altDescLink ? (
