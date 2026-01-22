@@ -357,19 +357,37 @@
         },
         {
           title: "Red Hat Advanced Developer Suite: Technical Enablement",
-          contributors: "",
+          contributors: "James Falkner, Evan Shortiss, Markus Nagel, Josh Wood, Ian Lawson, Valentina Rodriguez Sosa",
           associateLink: "https://training-lms.redhat.com/sso/saml/auth/rhlpint?RelayState=deeplinkoffering%3D86446329",
           partnerLink: "https://training-lms.redhat.com/sso/saml/auth/rhopen?RelayState=deeplinkoffering%3D86471369"
         },
         {
           title: "Product Enablement: OpenShift Perf and Scale Benchmarking",
-          contributors: "",
+          contributors: "Jose Castillo Lema",
           associateLink: "https://training-lms.redhat.com/sso/saml/auth/rhlpint?RelayState=deeplinkoffering%3D87474307",
           partnerLink: "https://training-lms.redhat.com/sso/saml/auth/rhopen?RelayState=deeplinkoffering%3D87474435"
         },
         {
+          title: "Red Hat OpenStack Platform 17.1 to 18 upgrade",
+          contributors: "Pedro Navarro Perez",
+          associateLink: "https://training-lms.redhat.com/sso/saml/auth/rhlpint?RelayState=deeplinkoffering%3D87404342",
+          partnerLink: "https://training-lms.redhat.com/sso/saml/auth/rhopen?RelayState=deeplinkoffering%3D87404343"
+        },
+        {
+          title: "Ansible Boot Camp Day 1",
+          contributors: "Andrew Block, Walter Bentley, Vinny Valdez",
+          associateLink: "https://training-lms.redhat.com/sso/saml/auth/rhlpint?RelayState=deeplinkoffering%3D88668943",
+          partnerLink: "https://training-lms.redhat.com/sso/saml/auth/rhopen?RelayState=deeplinkoffering%3D88668944"
+        },
+        {
+          title: "Product Enablement: OpenShift Workload Partitioning Deep Dive",
+          contributors: "George Zheng Wang",
+          associateLink: "https://training-lms.redhat.com/sso/saml/auth/rhlpint?RelayState=deeplinkoffering%3D89630557",
+          partnerLink: "https://training-lms.redhat.com/sso/saml/auth/rhopen?RelayState=deeplinkoffering%3D89630558"
+        },
+        {
           title: "Product Enablement: Customize RHCOS to add rsyslog package",
-          contributors: "",
+          contributors: "George Zheng Wang",
           associateLink: "https://training-lms.redhat.com/sso/saml/auth/rhlpint?RelayState=deeplinkoffering%3D87421031",
           partnerLink: "https://training-lms.redhat.com/sso/saml/auth/rhopen?RelayState=deeplinkoffering%3D887421032"
         }
@@ -481,12 +499,12 @@
                     </span>
                   </div>
                   <p className="text-slate-600 mb-4 leading-relaxed">
-                    The RCB is your AI drafting assistant. It handles the "heavy lifting"—building structure and drafting content—so you can focus on technical accuracy and real-world insights. We'll guide you through RCB during a kickoff call after Red Hat One.
+                    The RCB is your AI drafting assistant. It takes care of the “heavy lifting”—from structure to first drafts—so you can focus on technical accuracy and real-world insights. We’ll introduce RCB in a kickoff call after Red Hat One.
                   </p>
                   
                   <div className="bg-blue-50 border-l-4 border-blue-400 p-4 mb-6">
                     <p className="text-sm text-blue-800 font-semibold mb-1">📋 Express Your Interest:</p>
-                    <p className="text-sm text-blue-700">Join the RCB Expanded Pilot Access program. We'll reach out to you after Red Hat One to get you started with guided onboarding.</p>
+                    <p className="text-sm text-blue-700">Join the RCB Expanded Pilot. We'll reach out to you after Red Hat One to get you started with guided onboarding.</p>
                   </div>
                   
                   <div className="space-y-4">
@@ -579,7 +597,7 @@
                                 </>
                               )}
                             </p>
-                            {item.altDesc && (
+                            {(item.altDesc || item.altDescLink || item.altDescLabel) && (
                               <p>
                                 {item.altDescLabel && <strong>{item.altDescLabel} </strong>}
                                 {item.altDescLink ? (
