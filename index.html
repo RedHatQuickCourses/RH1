@@ -501,18 +501,6 @@
                       <span className="relative z-10">Express Interest in RCB</span>
                     </a>
                     
-                    <div className="text-center">
-                      <p className="text-sm text-slate-600 mb-2">Ready to share your knowledge sooner?</p>
-                      <a 
-                        href="https://red.ht/open-training-request" 
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-sm text-[#EE0000] hover:text-[#CC0000] hover:underline font-medium"
-                      >
-                        Get a head start via our official intake form →
-                      </a>
-                    </div>
-                    
                     <div className="pt-4 border-t border-slate-200">
                       <p className="text-sm text-slate-600 mb-2">Want to contribute to Open Training another way?</p>
                       <a 
@@ -562,9 +550,9 @@
                   <p className="text-sm text-slate-600 mb-4">Follow this process to share your expertise:</p>
                   <div className="space-y-4">
                     {[
-                      { step: 1, title: "Express Your Interest", desc: "Fill out the ", descLink: "https://forms.gle/LZUaWeBpvSKYoJmV8", descLinkText: "RCB Expanded Pilot Access form", descAfter: " to join the program." },
-                      { step: 2, title: "We'll Follow Up After RH1", desc: "We have recorded your interest in RCB. We will follow up with you after Red Hat One to confirm your access and schedule a kickoff call.", descLink: null },
-                    { step: 3, title: "Guided RCB Walkthrough", desc: "During your kickoff call, we'll guide you through RCB and help you create your course. Format: test-topic-KerberosID (e.g., test-ansible-basics-ashishks)", descLink: null },
+                      { step: 1, title: "Choose Your Path", desc: "Use RCB with guided onboarding: Fill out the ", descLink: "https://forms.gle/LZUaWeBpvSKYoJmV8", descLinkText: "RCB Expanded Pilot Access form", descAfter: " to join the program. ", altDesc: "Or contribute another way: ", altDescLink: "https://red.ht/open-training-request", altDescLinkText: "Share a Training Idea", altDescAfter: " to submit your idea directly." },
+                      { step: 2, title: "We'll Follow Up After RH1", desc: "For RCB users: We have recorded your interest in RCB. We will follow up with you after Red Hat One to confirm your access and schedule a kickoff call.", descLink: null, altDesc: "For alternative path: Our team will review your training idea and reach out to discuss next steps.", altDescLink: null },
+                    { step: 3, title: "Build Your Course", desc: "For RCB users: During your kickoff call, we'll guide you through RCB and help you create your course. Format: test-topic-KerberosID (e.g., test-ansible-basics-ashishks)", descLink: null, altDesc: "For alternative path: Work with our team to develop your training content using traditional methods.", altDescLink: null },
                     { step: 4, title: "Review & Publish", desc: "Our team reviews your draft, handles publishing to the LMS, and helps you claim GiveBack points.", descLink: null }
                     ].map((item, idx) => (
                       <div key={item.step} className="flex gap-4 group hover:bg-red-50 p-3 rounded-lg transition-all cursor-default" style={{ animationDelay: `${idx * 0.1}s` }}>
@@ -586,6 +574,26 @@
                                   {item.descLinkText}
                                 </a>
                                 {item.descAfter}
+                              </>
+                            )}
+                            {item.altDesc && (
+                              <>
+                                {item.altDesc}
+                                {item.altDescLink ? (
+                                  <>
+                                    <a 
+                                      href={item.altDescLink} 
+                                      target="_blank" 
+                                      rel="noopener noreferrer"
+                                      className="text-[#EE0000] hover:text-[#CC0000] hover:underline font-medium"
+                                    >
+                                      {item.altDescLinkText}
+                                    </a>
+                                    {item.altDescAfter}
+                                  </>
+                                ) : (
+                                  item.altDescAfter
+                                )}
                               </>
                             )}
                           </p>
@@ -655,7 +663,7 @@
                       <span className="text-sm font-medium">Contact Support</span>
                     </a>
                     <a 
-                      href="https://redhat.enterprise.slack.com/archives/C06KQJQJZ5L" 
+                      href="https://redhat.enterprise.slack.com/archives/C05RM9TSWUF" 
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-center gap-3 p-3 rounded-lg hover:bg-slate-100 transition-colors"
