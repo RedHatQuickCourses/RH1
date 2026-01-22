@@ -477,45 +477,55 @@
                   </div>
                   <div className="mb-4">
                     <span className="inline-block bg-yellow-100 text-yellow-800 text-xs font-semibold px-3 py-1 rounded-full mb-3">
-                      🚀 Early Access - Pilot Program
+                      🚀 Expanded Pilot Access
                     </span>
                   </div>
                   <p className="text-slate-600 mb-4 leading-relaxed">
-                    The RCB is your AI drafting assistant. It handles the "heavy lifting"—building structure and drafting content—so you can focus on technical accuracy and real-world insights.
-                  </p>
-                  <p className="text-sm text-slate-500 mb-6 italic">
-                    <strong>Note:</strong> This is early access software. You may encounter bugs. If the UI gets stuck, try refreshing. Built with Streamlit—use your Kerberos ID to login (no password required).
+                    The RCB is your AI drafting assistant. It handles the "heavy lifting"—building structure and drafting content—so you can focus on technical accuracy and real-world insights. We'll guide you through RCB during a kickoff call after Red Hat One.
                   </p>
                   
                   <div className="bg-blue-50 border-l-4 border-blue-400 p-4 mb-6">
-                    <p className="text-sm text-blue-800 font-semibold mb-1">📋 First Step Required:</p>
-                    <p className="text-sm text-blue-700">Submit your training idea using the form below to get started.</p>
+                    <p className="text-sm text-blue-800 font-semibold mb-1">📋 Express Your Interest:</p>
+                    <p className="text-sm text-blue-700">Join the RCB Expanded Pilot Access program. We'll reach out to you after Red Hat One to get you started with guided onboarding.</p>
                   </div>
                   
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="space-y-4">
                     <a 
-                      href="https://red.ht/open-training-request" 
+                      href="https://forms.gle/LZUaWeBpvSKYoJmV8" 
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center justify-center gap-2 bg-[#EE0000] hover:bg-[#CC0000] text-white font-bold py-4 px-6 rounded-xl transition-all shadow-md active:scale-95 pulse-glow hover:scale-105 hover:shadow-xl relative overflow-hidden group"
+                      className="flex items-center justify-center gap-2 bg-[#EE0000] hover:bg-[#CC0000] text-white font-bold py-4 px-6 rounded-xl transition-all shadow-md active:scale-95 pulse-glow hover:scale-105 hover:shadow-xl relative overflow-hidden group w-full"
                     >
                       <span className="absolute inset-0 shimmer"></span>
-                      <Icon name="FileText" size={20} className="relative z-10 group-hover:rotate-12 transition-transform" />
-                      <span className="relative z-10">Share a Training Idea</span>
+                      <Icon name="Rocket" size={20} className="relative z-10 group-hover:translate-x-1 transition-transform" />
+                      <span className="relative z-10">Express Interest in RCB</span>
                     </a>
-                    <a 
-                      href="http://72.32.49.239:8501/" 
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center justify-center gap-2 bg-slate-900 hover:bg-black text-white font-bold py-4 px-6 rounded-xl transition-all shadow-md active:scale-95 hover:scale-105 hover:shadow-xl group"
-                    >
-                      <Icon name="Rocket" size={20} className="group-hover:translate-x-1 transition-transform" />
-                      Jump into RCB
-                    </a>
+                    
+                    <div className="text-center">
+                      <p className="text-sm text-slate-600 mb-2">Ready to share your knowledge sooner?</p>
+                      <a 
+                        href="https://red.ht/open-training-request" 
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-sm text-[#EE0000] hover:text-[#CC0000] hover:underline font-medium"
+                      >
+                        Get a head start via our official intake form →
+                      </a>
+                    </div>
+                    
+                    <div className="pt-4 border-t border-slate-200">
+                      <p className="text-sm text-slate-600 mb-2">Want to contribute to Open Training another way?</p>
+                      <a 
+                        href="https://red.ht/open-training-request" 
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center justify-center gap-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold py-3 px-6 rounded-xl transition-all"
+                      >
+                        <Icon name="FileText" size={18} />
+                        Share a Training Idea
+                      </a>
+                    </div>
                   </div>
-                  <p className="text-xs text-slate-500 mt-3 text-center">
-                    After submitting the form, you can jump right into RCB or wait for our team to reach out.
-                  </p>
                 </section>
                 
                 <div className="bg-white rounded-2xl p-6 shadow-md border border-slate-100 interactive-card">
@@ -523,6 +533,7 @@
                     <Icon name="Rocket" size={20} className="text-[#EE0000]" />
                     Key Features in RCB
                   </h3>
+                  <p className="text-sm text-slate-600 mb-4">During your guided onboarding, we'll help you use these RCB features:</p>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
                     <div className="flex items-start gap-2">
                       <span className="text-slate-400">•</span>
@@ -551,9 +562,9 @@
                   <p className="text-sm text-slate-600 mb-4">Follow this process to share your expertise:</p>
                   <div className="space-y-4">
                     {[
-                      { step: 1, title: "Submit Your Idea", desc: "Fill out the ", descLink: "https://red.ht/open-training-request", descLinkText: "'Share a Training Idea or Knowledge Gap' form", descAfter: ". This gets your project in our queue." },
-                      { step: 2, title: "Choose Your Path", desc: "Jump right into ", descLink: "http://72.32.49.239:8501/", descLinkText: "RCB", descAfter: " (use Kerberos ID, no password) or wait for our team to reach out for guidance." },
-                    { step: 3, title: "Build Your Course", desc: "Use RCB to create your repo. Format: test-topic-KerberosID (e.g., test-ansible-basics-ashishks)", descLink: null },
+                      { step: 1, title: "Express Your Interest", desc: "Fill out the ", descLink: "https://forms.gle/LZUaWeBpvSKYoJmV8", descLinkText: "RCB Expanded Pilot Access form", descAfter: " to join the program." },
+                      { step: 2, title: "We'll Follow Up After RH1", desc: "We have recorded your interest in RCB. We will follow up with you after Red Hat One to confirm your access and schedule a kickoff call.", descLink: null },
+                    { step: 3, title: "Guided RCB Walkthrough", desc: "During your kickoff call, we'll guide you through RCB and help you create your course. Format: test-topic-KerberosID (e.g., test-ansible-basics-ashishks)", descLink: null },
                     { step: 4, title: "Review & Publish", desc: "Our team reviews your draft, handles publishing to the LMS, and helps you claim GiveBack points.", descLink: null }
                     ].map((item, idx) => (
                       <div key={item.step} className="flex gap-4 group hover:bg-red-50 p-3 rounded-lg transition-all cursor-default" style={{ animationDelay: `${idx * 0.1}s` }}>
@@ -628,11 +639,29 @@
                       <span className="text-sm font-medium">Open Training Source Page</span>
                     </a>
                     <a 
+                      href="https://red.ht/open-training-request" 
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-3 p-3 rounded-lg hover:bg-slate-100 transition-colors"
+                    >
+                      <Icon name="FileText" size={18} className="text-red-500" />
+                      <span className="text-sm font-medium">Share a Training Idea</span>
+                    </a>
+                    <a 
                       href="mailto:opentraining@redhat.com" 
                       className="flex items-center gap-3 p-3 rounded-lg hover:bg-slate-100 transition-colors"
                     >
                       <Icon name="MessageCircle" size={18} className="text-red-500" />
                       <span className="text-sm font-medium">Contact Support</span>
+                    </a>
+                    <a 
+                      href="https://redhat.enterprise.slack.com/archives/C06KQJQJZ5L" 
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-3 p-3 rounded-lg hover:bg-slate-100 transition-colors"
+                    >
+                      <Icon name="MessageCircle" size={18} className="text-red-500" />
+                      <span className="text-sm font-medium">Slack: #help-open-training</span>
                     </a>
                   </div>
                   <div className="mt-4 p-4 bg-slate-100 rounded-lg">
