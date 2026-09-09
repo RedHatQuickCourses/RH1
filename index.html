@@ -5,82 +5,64 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Red Hat Open Training — contribute with the Rapid Course Builder, find resources, and browse published courses with contributor credits.">
   <title>Red Hat Open Training</title>
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Red Hat Open Training Program">
+  <meta property="og:description" content="Share your expertise through Open Training. Browse published courses and learn how to contribute with the Rapid Course Builder.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://redhatquickcourses.github.io/open-training/">
+  <meta property="og:image" content="https://redhatquickcourses.github.io/open-training/images/redhat-logo.png">
+
+  <link rel="icon" type="image/png" href="./images/redhat-logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@400;500;600;700;900&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
-  <script crossorigin src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
-  <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
-  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <style>
-    /* Red Hat Display font */
     * {
       font-family: 'Red Hat Display', sans-serif;
     }
-    
-    /* Custom styles for icon fills */
-    .icon-fill {
-      fill: currentColor;
-    }
-    
-    /* Smooth scroll behavior */
+
     html {
       scroll-behavior: smooth;
     }
-    
-    /* Animated gradient background */
-    @keyframes gradient-shift {
-      0%, 100% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-    }
-    
-    .animated-gradient {
+
+    .header-gradient {
       background: #fce3e3;
-      background-size: 400% 400%;
     }
-    
-    /* Floating animation for icons */
+
     @keyframes float {
       0%, 100% { transform: translateY(0px); }
       50% { transform: translateY(-10px); }
     }
-    
+
     .float-animation {
       animation: float 3s ease-in-out infinite;
     }
-    
-    /* Pulse animation */
+
     @keyframes pulse-glow {
       0%, 100% { box-shadow: 0 0 0 0 rgba(238, 0, 0, 0.7); }
       50% { box-shadow: 0 0 0 10px rgba(238, 0, 0, 0); }
     }
-    
+
     .pulse-glow {
       animation: pulse-glow 2s infinite;
     }
-    
-    /* Fade in on scroll */
+
     @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
     }
-    
+
     .fade-in-up {
       animation: fadeInUp 0.6s ease-out;
     }
-    
-    /* Shimmer effect */
+
     @keyframes shimmer {
       0% { background-position: -1000px 0; }
       100% { background-position: 1000px 0; }
     }
-    
+
     .shimmer {
       background: linear-gradient(
         90deg,
@@ -91,676 +73,398 @@
       background-size: 1000px 100%;
       animation: shimmer 2s infinite;
     }
-    
-    /* Interactive card hover */
+
     .interactive-card {
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      transform-style: preserve-3d;
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
-    
+
     .interactive-card:hover {
-      transform: translateY(-8px) scale(1.02);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
     }
-    
-    /* Sparkle particles */
-    @keyframes sparkle {
-      0%, 100% {
-        opacity: 0;
-        transform: scale(0) rotate(0deg);
+
+    .course-card:focus-within {
+      outline: 2px solid #EE0000;
+      outline-offset: 2px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+
+      .float-animation,
+      .pulse-glow,
+      .shimmer,
+      .fade-in-up,
+      .interactive-card {
+        animation: none !important;
+        transition: none !important;
       }
-      50% {
-        opacity: 1;
-        transform: scale(1) rotate(180deg);
+
+      .interactive-card:hover {
+        transform: none;
       }
     }
-    
-    .sparkle {
+
+    .sr-only {
       position: absolute;
-      width: 4px;
-      height: 4px;
-      background: white;
-      border-radius: 50%;
-      animation: sparkle 2s infinite;
-    }
-    
-    /* Number counter animation */
-    @keyframes countUp {
-      from { opacity: 0; transform: scale(0.5); }
-      to { opacity: 1; transform: scale(1); }
-    }
-    
-    .count-animate {
-      animation: countUp 0.5s ease-out;
-    }
-    
-    /* Auto-scrolling courses list */
-    .courses-scroller-container {
-      position: relative;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
       overflow: hidden;
-      border-radius: 12px;
-    }
-    
-    .courses-scroller-container::before,
-    .courses-scroller-container::after {
-      content: '';
-      position: absolute;
-      left: 0;
-      right: 0;
-      height: 40px;
-      z-index: 10;
-      pointer-events: none;
-    }
-    
-    .courses-scroller-container::before {
-      top: 0;
-      background: linear-gradient(to bottom, white, transparent);
-    }
-    
-    .courses-scroller-container::after {
-      bottom: 0;
-      background: linear-gradient(to top, white, transparent);
-    }
-    
-    .courses-scroller-viewport {
-      height: 420px;
-      overflow: hidden;
-      position: relative;
-    }
-    
-    .courses-scrolling-list {
-      animation: courses-scroll 30s linear infinite;
-      will-change: transform;
-    }
-    
-    .courses-scrolling-list.paused {
-      animation-play-state: paused;
-    }
-    
-    .courses-scrolling-list.fast {
-      animation-duration: 15s;
-    }
-    
-    .courses-scrolling-list.faster {
-      animation-duration: 8s;
-    }
-    
-    @keyframes courses-scroll {
-      0% {
-        transform: translateY(0);
-      }
-      100% {
-        transform: translateY(-50%);
-      }
-    }
-    
-    .course-scroll-item {
-      margin-bottom: 10px;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
     }
   </style>
 </head>
-<body>
-  <div id="root"></div>
+<body class="min-h-screen bg-slate-50 text-slate-900 pb-12">
+  <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:bg-white focus:px-4 focus:py-2 focus:rounded-lg focus:shadow-lg focus:text-[#EE0000] focus:font-semibold">
+    Skip to main content
+  </a>
 
-  <script type="text/babel">
-    const { useState, useEffect, useRef } = React;
+  <header class="header-gradient py-8 px-6 text-center shadow-lg">
+    <div class="max-w-2xl mx-auto">
+      <div class="flex items-center justify-center gap-4 mb-2">
+        <img src="./images/redhat-logo.png" alt="Red Hat" class="h-12 md:h-16 w-auto">
+        <h1 class="text-3xl md:text-4xl font-bold tracking-tight text-black">
+          Open Training Program
+        </h1>
+      </div>
+    </div>
+  </header>
 
-    const App = () => {
-      const [courseCount, setCourseCount] = useState(0);
-      const [isVisible, setIsVisible] = useState(false);
-      const [isPaused, setIsPaused] = useState(false);
-      const [speedLevel, setSpeedLevel] = useState(0);
-      const sectionRef = useRef(null);
-      const courseListRef = useRef(null);
-      
-      // Animated counter effect
-      useEffect(() => {
-        const targetCount = 10; // Update this with actual course count
-        const duration = 2000;
-        const steps = 60;
-        const increment = targetCount / steps;
-        const stepDuration = duration / steps;
-        
-        let current = 0;
-        const timer = setInterval(() => {
-          current += increment;
-          if (current >= targetCount) {
-            setCourseCount(targetCount);
-            clearInterval(timer);
-          } else {
-            setCourseCount(Math.floor(current));
-          }
-        }, stepDuration);
-        
-        return () => clearInterval(timer);
-      }, []);
-      
-      // Intersection Observer for scroll animations
-      useEffect(() => {
-        // Fallback for browsers without IntersectionObserver
-        if (typeof IntersectionObserver === 'undefined') {
-          const elements = document.querySelectorAll('.scroll-animate');
-          elements.forEach((el) => el.classList.add('fade-in-up'));
-          return;
-        }
-        
-        const observer = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                entry.target.classList.add('fade-in-up');
-                setIsVisible(true);
-              }
-            });
-          },
-          { threshold: 0.1 }
-        );
-        
-        const elements = document.querySelectorAll('.scroll-animate');
-        elements.forEach((el) => observer.observe(el));
-        
-        return () => observer.disconnect();
-      }, []);
-      
-      // Mouse wheel handler
-      useEffect(() => {
-        if (courseListRef.current) {
-          const list = courseListRef.current;
-          
-          const handleWheel = (e) => {
-            e.preventDefault();
-            list.classList.add('faster');
-            clearTimeout(list.wheelTimeout);
-            list.wheelTimeout = setTimeout(() => {
-              list.classList.remove('faster');
-              if (speedLevel === 1) {
-                list.classList.add('fast');
-              }
-            }, 2000);
-          };
-          
-          list.addEventListener('wheel', handleWheel);
-          
-          return () => {
-            list.removeEventListener('wheel', handleWheel);
-            if (list.wheelTimeout) clearTimeout(list.wheelTimeout);
-          };
-        }
-      }, [speedLevel]);
-      
-      // Handle pause/resume
-      useEffect(() => {
-        if (courseListRef.current) {
-          if (isPaused) {
-            courseListRef.current.classList.add('paused');
-          } else {
-            courseListRef.current.classList.remove('paused');
-          }
-        }
-      }, [isPaused]);
-      
-      // Handle speed changes
-      useEffect(() => {
-        if (courseListRef.current) {
-          courseListRef.current.classList.remove('fast', 'faster');
-          if (speedLevel === 1) {
-            courseListRef.current.classList.add('fast');
-          } else if (speedLevel === 2) {
-            courseListRef.current.classList.add('faster');
-          }
-        }
-      }, [speedLevel]);
+  <main id="main-content" class="max-w-2xl mx-auto px-4 -mt-6 pt-2">
 
-      const publishedCourses = [
-        {
-          title: "Leapp Upgrade with Red Hat Satellite 6",
-          contributors: "Soham Majumdar, Manu Sunil",
-          associateLink: "https://training-lms.redhat.com/sso/saml/auth/rhlpint?RelayState=deeplinkoffering%3D74305503",
-          partnerLink: "https://training-lms.redhat.com/sso/saml/auth/rhopen?RelayState=deeplinkoffering%3D74405084"
-        },
-        {
-          title: "Minor upgrade of Red Hat Satellite 6.15 to 6.15.z",
-          contributors: "Soham Majumdar, Manu Sunil",
-          associateLink: "https://training-lms.redhat.com/sso/saml/auth/rhlpint?RelayState=deeplinkoffering%3D74347503",
-          partnerLink: "https://training-lms.redhat.com/sso/saml/auth/rhopen?RelayState=deeplinkoffering%3D74405085"
-        },
-        {
-          title: "Fixing httpd Service on Red Hat Satellite 6",
-          contributors: "Soham Majumdar, Manu Sunil",
-          associateLink: "https://training-lms.redhat.com/sso/saml/auth/rhlpint?RelayState=deeplinkoffering%3D74347502",
-          partnerLink: "https://training-lms.redhat.com/sso/saml/auth/rhopen?RelayState=deeplinkoffering%3D74405083"
-        },
-        {
-          title: "Fixing and Optimizing Performance on Red Hat Satellite 6",
-          contributors: "Soham Majumdar, Manu Sunil",
-          associateLink: "https://training-lms.redhat.com/sso/saml/auth/rhlpint?RelayState=deeplinkoffering%3D74347501",
-          partnerLink: "https://training-lms.redhat.com/sso/saml/auth/rhopen?RelayState=deeplinkoffering%3D74405081"
-        },
-        {
-          title: "Configuring tftp on Red Hat Satellite 6",
-          contributors: "Soham Majumdar, Manu Sunil",
-          associateLink: "https://training-lms.redhat.com/sso/saml/auth/rhlpint?RelayState=deeplinkoffering%3D74347498",
-          partnerLink: "https://training-lms.redhat.com/sso/saml/auth/rhopen?RelayState=deeplinkoffering%3D74405080"
-        },
-        {
-          title: "Troubleshooting instance connectivity issue in Red Hat OpenStack Platform 18 (BFX028) v18.0",
-          contributors: "Slawek Kaplonski",
-          associateLink: "https://training-lms.redhat.com/sso/saml/auth/rhlpint?RelayState=deeplinkoffering%3D82263488",
-          partnerLink: "https://training-lms.redhat.com/sso/saml/auth/rhopen?RelayState=deeplinkoffering%3D82870780"
-        },
-        {
-          title: "Hosted Control Planes on a Single Bare Metal Node",
-          contributors: "Sadique Puthen Peedikayil, Praveen Thakur, Ami Desai",
-          associateLink: "https://training-lms.redhat.com/sso/saml/auth/rhlpint?RelayState=deeplinkoffering%3D82958185",
-          partnerLink: "https://training-lms.redhat.com/sso/saml/auth/rhopen?RelayState=deeplinkoffering%3D82958309"
-        },
-        {
-          title: "Red Hat Advanced Developer Suite: Technical Enablement",
-          contributors: "James Falkner, Evan Shortiss, Markus Nagel, Josh Wood, Ian Lawson, Valentina Rodriguez Sosa",
-          associateLink: "https://training-lms.redhat.com/sso/saml/auth/rhlpint?RelayState=deeplinkoffering%3D86446329",
-          partnerLink: "https://training-lms.redhat.com/sso/saml/auth/rhopen?RelayState=deeplinkoffering%3D86471369"
-        },
-        {
-          title: "Product Enablement: OpenShift Perf and Scale Benchmarking",
-          contributors: "Jose Castillo Lema",
-          associateLink: "https://training-lms.redhat.com/sso/saml/auth/rhlpint?RelayState=deeplinkoffering%3D87474307",
-          partnerLink: "https://training-lms.redhat.com/sso/saml/auth/rhopen?RelayState=deeplinkoffering%3D87474435"
-        },
-        {
-          title: "Red Hat OpenStack Platform 17.1 to 18 upgrade",
-          contributors: "Pedro Navarro Perez",
-          associateLink: "https://training-lms.redhat.com/sso/saml/auth/rhlpint?RelayState=deeplinkoffering%3D87404342",
-          partnerLink: "https://training-lms.redhat.com/sso/saml/auth/rhopen?RelayState=deeplinkoffering%3D87404343"
-        },
-        {
-          title: "Ansible Boot Camp Day 1",
-          contributors: "Andrew Block, Walter Bentley, Vinny Valdez",
-          associateLink: "https://training-lms.redhat.com/sso/saml/auth/rhlpint?RelayState=deeplinkoffering%3D88668943",
-          partnerLink: "https://training-lms.redhat.com/sso/saml/auth/rhopen?RelayState=deeplinkoffering%3D88668944"
-        },
-        {
-          title: "Product Enablement: OpenShift Workload Partitioning Deep Dive",
-          contributors: "George Zheng Wang",
-          associateLink: "https://training-lms.redhat.com/sso/saml/auth/rhlpint?RelayState=deeplinkoffering%3D89630557",
-          partnerLink: "https://training-lms.redhat.com/sso/saml/auth/rhopen?RelayState=deeplinkoffering%3D89630558"
-        },
-        {
-          title: "Product Enablement: Customize RHCOS to add rsyslog package",
-          contributors: "George Zheng Wang",
-          associateLink: "https://training-lms.redhat.com/sso/saml/auth/rhlpint?RelayState=deeplinkoffering%3D87421031",
-          partnerLink: "https://training-lms.redhat.com/sso/saml/auth/rhopen?RelayState=deeplinkoffering%3D887421032"
-        }
-      ];
-      
-      // Duplicate courses for seamless scrolling loop
-      const duplicatedCourses = [...publishedCourses, ...publishedCourses];
-
-      // Icon component with inline SVG icons
-      const Icon = ({ name, size = 24, className = "", fill = false }) => {
-        const icons = {
-          Zap: <svg width={size} height={size} viewBox="0 0 24 24" fill={fill ? "currentColor" : "none"} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>,
-          FileText: <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>,
-          Rocket: <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>,
-          Sparkles: <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>,
-          BookOpen: <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>,
-          ExternalLink: <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>,
-          MessageCircle: <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>,
-          PlayCircle: <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>,
-          Users: <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>,
-          Mail: <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-        };
-        return icons[name] || null;
-      };
-
-      return (
-        <div className="min-h-screen bg-slate-50 text-slate-900 pb-12" style={{ fontFamily: "'Red Hat Display', sans-serif" }}>
-          {/* Red Hat Branded Header with animated gradient */}
-          <header className="animated-gradient text-white py-8 px-6 text-center shadow-lg relative overflow-hidden">
-            {/* Sparkle particles */}
-            {[...Array(6)].map((_, i) => (
-              <div
-                key={i}
-                className="sparkle"
-                style={{
-                  left: `${Math.random() * 100}%`,
-                  top: `${Math.random() * 100}%`,
-                  animationDelay: `${i * 0.3}s`
-                }}
-              />
-            ))}
-            <div className="max-w-2xl mx-auto relative z-10">
-              <div className="flex items-center justify-center gap-4 mb-2 fade-in-up">
-                <img 
-                  src="./images/redhat-logo.png" 
-                  alt="Red Hat Logo" 
-                  className="h-12 md:h-16 w-auto"
-                />
-                <h1 className="text-3xl md:text-4xl font-bold tracking-tight" style={{ color: '#000000' }}>
-                  Open Training Program
-                </h1>
-              </div>
-            </div>
-          </header>
-
-          <main className="max-w-2xl mx-auto px-4 -mt-6 pt-2">
-
-            {/* Open Training Program Description */}
-            <section className="bg-white rounded-2xl shadow-xl p-6 mb-6 border border-slate-100 scroll-animate interactive-card">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="bg-red-50 p-2 rounded-lg text-[#EE0000] float-animation">
-                  <Icon name="BookOpen" size={24} />
-                </div>
-                <h2 className="text-xl font-bold">What is Open Training?</h2>
-              </div>
-              <p className="text-slate-600 leading-relaxed mb-4">
-                Open Training is Red Hat's self-service content development model that empowers subject matter experts to share their knowledge by creating training content. This collaborative approach complements our formal development efforts, ensuring that our materials stay timely, relevant, and grounded in real-world experience.
-              </p>
-              <div className="pt-4 border-t border-slate-200">
-                <p className="text-slate-600 italic mb-2">
-                  Marc Ewing shared his knowledge and started a revolution. Today, you can do the same.
-                </p>
-                <p className="text-slate-700 font-semibold">
-                  Are you "the person in the red hat"?
-                </p>
-              </div>
-            </section>
-
-            <section className="space-y-6 scroll-animate">
-                {/* Rapid Course Builder */}
-                <section className="bg-white rounded-2xl shadow-xl p-6 border border-slate-100 scroll-animate interactive-card">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="bg-red-50 p-2 rounded-lg text-[#EE0000] float-animation">
-                      <Icon name="Zap" size={24} fill={true} />
-                    </div>
-                    <h2 className="text-xl font-bold">Open Training + Rapid Course Builder (RCB)</h2>
-                  </div>
-                  <div className="mb-4 flex flex-wrap gap-2 items-center">
-                    <span className="inline-block bg-slate-100 text-slate-700 text-xs font-semibold px-3 py-1 rounded-full">
-                      In active development
-                    </span>
-                  </div>
-                  <p className="text-slate-600 mb-3 leading-relaxed">
-                    The RCB is your AI drafting assistant. It takes care of the “heavy lifting”—from structure to first drafts—so you can focus on technical accuracy and real-world insights. We’ll introduce RCB in a kickoff call after we review your request.
-                  </p>
-                  <p className="text-sm text-slate-700 mb-6 border-l-4 border-slate-200 pl-3">
-                    <strong className="text-slate-800">Ask us about RCB.</strong> We’re promoting it while it’s still a work in progress—express interest and we’ll align you on what’s available today, how the pilot works, and what’s on the roadmap.
-                  </p>
-                  
-                  <div className="space-y-4">
-                    <a 
-                      href="https://redhat.atlassian.net/jira/software/c/projects/RHTR/form/51" 
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center justify-center gap-2 bg-[#EE0000] hover:bg-[#CC0000] text-white font-bold py-4 px-6 rounded-xl transition-all shadow-md active:scale-95 pulse-glow hover:scale-105 hover:shadow-xl relative overflow-hidden group w-full"
-                    >
-                      <span className="absolute inset-0 shimmer"></span>
-                      <Icon name="Rocket" size={20} className="relative z-10 group-hover:translate-x-1 transition-transform" />
-                      <span className="relative z-10">Ready to share your expertise?</span>
-                    </a>
-                  </div>
-                </section>
-                
-                <div className="bg-white rounded-2xl p-6 shadow-md border border-slate-100 interactive-card">
-                  <h3 className="text-lg font-bold mb-4 flex items-center gap-2">
-                    <Icon name="Rocket" size={20} className="text-[#EE0000]" />
-                    Key Features in RCB
-                  </h3>
-                  <p className="text-sm text-slate-600 mb-4">During guided onboarding, we’ll help you use these RCB features. The tool is still evolving—this is the direction we’re building toward:</p>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
-                    <div className="flex items-start gap-2">
-                      <span className="text-slate-400">•</span>
-                      <span className="text-slate-600">Initial content drafting (Antora AsciiDoc based training)</span>
-                    </div>
-                    <div className="flex items-start gap-2">
-                      <span className="text-slate-400">•</span>
-                      <span className="text-slate-600">GitHub repository creation</span>
-                    </div>
-                    <div className="flex items-start gap-2">
-                      <span className="text-slate-400">•</span>
-                      <span className="text-slate-600">Image creation</span>
-                    </div>
-                    <div className="flex items-start gap-2">
-                      <span className="text-slate-400">•</span>
-                      <span className="text-slate-600">Audio and video generation</span>
-                    </div>
-                  </div>
-                </div>
-                
-                <div className="bg-white rounded-2xl p-6 shadow-md border border-slate-100 interactive-card">
-                  <h3 className="text-lg font-bold mb-2 flex items-center gap-2">
-                    <Icon name="Sparkles" size={20} className="text-yellow-500 float-animation" />
-                    From your request to published training
-                  </h3>
-                  <p className="text-sm text-slate-600 mb-4">
-                    After you submit the form, here&apos;s what happens next! See the <strong>Resources & Support</strong> section below for more information.
-                  </p>
-                  <div className="space-y-4">
-                    {[
-                      { step: 1, title: "Submit your training idea", desc: "Complete the ", descLink: "https://redhat.atlassian.net/jira/software/c/projects/RHTR/form/51", descLinkText: "form", descAfter: " with your topic, details, and interest in collaborating with the Open Training Program.", descLabel: null, altDescLink: null },
-                      { step: 2, title: "We’ll follow up", desc: "Our team reviews your request and sets up a call to confirm access, expectations, and what you need to get started—including an intro to RCB if you’re using it.", descLink: null, descLabel: null, altDescLink: null },
-                    { step: 3, title: "Build your course", desc: "During your kickoff, we’ll guide you through RCB and help you create your course repo.", descLink: null, descLabel: null, altDescLink: null },
-                    { step: 4, title: "Review & publish", desc: "Our team reviews your final draft after you’re done building the course, handles publishing to the LMS, and helps you claim GiveBack points.", descLink: null, descLabel: null, altDescLink: null }
-                    ].map((item, idx) => (
-                      <div key={item.step} className="flex gap-4 group hover:bg-red-50 p-3 rounded-lg transition-all cursor-default" style={{ animationDelay: `${idx * 0.1}s` }}>
-                        <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-red-100 to-red-200 text-[#EE0000] flex items-center justify-center font-bold text-sm group-hover:scale-110 group-hover:shadow-md transition-all">
-                          {item.step}
-                        </div>
-                        <div>
-                          <h4 className="font-bold text-slate-800 group-hover:text-[#EE0000] transition-colors">{item.title}</h4>
-                          <div className="text-sm text-slate-600 space-y-2">
-                            <p>
-                              {item.descLabel && <strong>{item.descLabel} </strong>}
-                              {item.desc}
-                              {item.descLink && (
-                                <>
-                                  <a 
-                                    href={item.descLink} 
-                                    target="_blank" 
-                                    rel="noopener noreferrer"
-                                    className="text-[#EE0000] hover:text-[#CC0000] hover:underline font-medium"
-                                  >
-                                    {item.descLinkText}
-                                  </a>
-                                  {item.descAfter}
-                                </>
-                              )}
-                            </p>
-                            {(item.altDesc || item.altDescLink || item.altDescLabel) && (
-                              <p>
-                                {item.altDescLabel && <strong>{item.altDescLabel} </strong>}
-                                {item.altDescLink ? (
-                                  <>
-                                    <a 
-                                      href={item.altDescLink} 
-                                      target="_blank" 
-                                      rel="noopener noreferrer"
-                                      className="text-[#EE0000] hover:text-[#CC0000] hover:underline font-medium"
-                                    >
-                                      {item.altDescLinkText}
-                                    </a>
-                                    {item.altDescAfter}
-                                  </>
-                                ) : (
-                                  item.altDesc
-                                )}
-                              </p>
-                            )}
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-                
-                <div className="bg-gradient-to-br from-red-50 to-orange-50 rounded-2xl p-6 shadow-md border border-red-100 interactive-card">
-                  <h3 className="text-lg font-bold mb-4 flex items-center gap-2 text-[#EE0000]">
-                    <Icon name="Sparkles" size={20} className="text-yellow-500" />
-                    Why You Should Do This
-                  </h3>
-                  <div className="space-y-3">
-                    <div className="flex items-start gap-3">
-                      <div className="text-[#EE0000] mt-1">✓</div>
-                      <div>
-                        <p className="font-semibold text-slate-800">Scale Your Impact</p>
-                        <p className="text-sm text-slate-600">Address common customer pain points and fill critical knowledge gaps.</p>
-                      </div>
-                    </div>
-                    <div className="flex items-start gap-3">
-                      <div className="text-[#EE0000] mt-1">✓</div>
-                      <div>
-                        <p className="font-semibold text-slate-800">Get Rewarded</p>
-                        <p className="text-sm text-slate-600">Earn GiveBack points for developing new courses or updating existing ones.</p>
-                      </div>
-                    </div>
-                    <div className="flex items-start gap-3">
-                      <div className="text-[#EE0000] mt-1">✓</div>
-                      <div>
-                        <p className="font-semibold text-slate-800">From In-Demand to On-Demand</p>
-                        <p className="text-sm text-slate-600">Turn your expertise into a lasting resource available to everyone, anytime.</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                
-                {/* Helpful Resources Footer */}
-                <section className="mt-12 pt-8 border-t border-slate-200 scroll-animate">
-                  <h3 className="text-sm font-bold text-slate-400 uppercase tracking-widest mb-4">Resources & Support</h3>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <a 
-                      href="https://source.redhat.com/departments/products_and_global_engineering/whats_new_from_products_and_portfolio/open_training_program" 
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-3 p-3 rounded-lg hover:bg-slate-100 transition-colors"
-                    >
-                      <Icon name="Users" size={18} className="text-red-500" />
-                      <span className="text-sm font-medium">Open Training Source Page</span>
-                    </a>
-                    <a 
-                      href="https://redhat.atlassian.net/jira/software/c/projects/RHTR/form/51" 
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-3 p-3 rounded-lg hover:bg-slate-100 transition-colors"
-                    >
-                      <Icon name="FileText" size={18} className="text-red-500" />
-                      <span className="text-sm font-medium">Share a Training Idea</span>
-                    </a>
-                    <a 
-                      href="mailto:opentraining@redhat.com" 
-                      className="flex items-center gap-3 p-3 rounded-lg hover:bg-slate-100 transition-colors"
-                    >
-                      <Icon name="MessageCircle" size={18} className="text-red-500" />
-                      <span className="text-sm font-medium">Contact Support</span>
-                    </a>
-                    <a 
-                      href="https://redhat.enterprise.slack.com/archives/C05RM9TSWUF" 
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-3 p-3 rounded-lg hover:bg-slate-100 transition-colors"
-                    >
-                      <Icon name="MessageCircle" size={18} className="text-red-500" />
-                      <span className="text-sm font-medium">Slack: #help-open-training</span>
-                    </a>
-                  </div>
-                </section>
-              </section>
-
-            {/* Published Courses Gallery */}
-            <section className="mt-10 scroll-animate" ref={sectionRef}>
-              <div className="mb-4">
-                <h2 className="text-xl font-bold flex items-center gap-2 flex-wrap">
-                  <Icon name="BookOpen" size={22} className="text-[#EE0000] float-animation" />
-                  Published Courses
-                  <span className="ml-2 text-sm font-normal text-slate-500">
-                    ({courseCount}+ available)
-                  </span>
-                </h2>
-                <p className="text-sm text-slate-600 mt-2">Examples of Open Training in the LMS—contributors are listed on each course where available.</p>
-              </div>
-              
-              <div className="courses-scroller-container bg-white rounded-xl shadow-md border border-slate-200 p-4">
-                <div 
-                  className="courses-scroller-viewport"
-                  onMouseEnter={() => !isPaused && courseListRef.current?.classList.add('paused')}
-                  onMouseLeave={() => !isPaused && courseListRef.current?.classList.remove('paused')}
-                >
-                  <ul 
-                    ref={courseListRef}
-                    className="courses-scrolling-list space-y-4"
-                  >
-                    {duplicatedCourses.map((course, idx) => (
-                      <li key={idx} className="course-scroll-item group bg-slate-50 p-5 rounded-xl border border-slate-200 hover:border-red-300 hover:shadow-lg transition-all">
-                        <div className="mb-3">
-                          <h4 className="font-bold text-slate-900 group-hover:text-[#EE0000] transition-colors">
-                            {course.title}
-                          </h4>
-                          {course.contributors && (
-                            <p className="text-xs text-slate-500 mt-1">Contributors: {course.contributors}</p>
-                          )}
-                        </div>
-                        <div className="flex items-center justify-center gap-4 pt-3 border-t border-slate-100">
-                          <a 
-                            href={course.associateLink} 
-                            target="_blank" 
-                            rel="noopener noreferrer"
-                            className="text-sm font-medium text-[#EE0000] hover:text-[#CC0000] hover:underline transition-colors"
-                          >
-                            Associate
-                          </a>
-                          <span className="text-slate-300">|</span>
-                          <a 
-                            href={course.partnerLink} 
-                            target="_blank" 
-                            rel="noopener noreferrer"
-                            className="text-sm font-medium text-[#EE0000] hover:text-[#CC0000] hover:underline transition-colors"
-                          >
-                            Partner
-                          </a>
-                        </div>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                
-                <div className="flex items-center justify-center gap-3 mt-4 pt-4 border-t border-slate-200">
-                  <button
-                    onClick={() => setIsPaused(true)}
-                    disabled={isPaused}
-                    className="px-4 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded-lg text-sm font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                  >
-                    Pause
-                  </button>
-                  <button
-                    onClick={() => setIsPaused(false)}
-                    disabled={!isPaused}
-                    className="px-4 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded-lg text-sm font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                  >
-                    Resume
-                  </button>
-                  <button
-                    onClick={() => setSpeedLevel((speedLevel + 1) % 3)}
-                    className="px-4 py-2 bg-[#EE0000] hover:bg-[#CC0000] text-white rounded-lg text-sm font-medium transition-colors"
-                  >
-                    Speed: {['Normal', 'Fast', 'Faster'][speedLevel]}
-                  </button>
-                </div>
-                <p className="text-center text-xs text-slate-500 mt-2">
-                  Hover to pause • Use mouse wheel to speed up
-                </p>
-              </div>
-            </section>
-
-            <footer className="mt-16 text-center text-slate-400 text-xs">
-              <p className="mt-2 font-mono">Build. Share. Revolutionize.</p>
-              <p className="mt-4 text-slate-500 italic">
-                "Marc Ewing shared his knowledge and started a revolution. Today, you can do the same."
-              </p>
-            </footer>
-          </main>
+    <!-- Open Training Program Description -->
+    <section class="bg-white rounded-2xl shadow-xl p-6 mb-6 border border-slate-100 interactive-card">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="bg-red-50 p-2 rounded-lg text-[#EE0000]" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
         </div>
-      );
-    };
+        <h2 class="text-xl font-bold">What is Open Training?</h2>
+      </div>
+      <p class="text-slate-600 leading-relaxed mb-4">
+        Open Training is Red Hat's self-service content development model that empowers subject matter experts to share their knowledge by creating training content. This collaborative approach complements our formal development efforts, ensuring that our materials stay timely, relevant, and grounded in real-world experience.
+      </p>
+      <div class="pt-4 border-t border-slate-200">
+        <p class="text-slate-600 italic mb-2">
+          Marc Ewing shared his knowledge and started a revolution. Today, you can do the same.
+        </p>
+        <p class="text-slate-700 font-semibold">
+          Are you "the person in the red hat"?
+        </p>
+      </div>
+    </section>
 
-    ReactDOM.render(<App />, document.getElementById('root'));
+    <section class="space-y-6">
+      <!-- Rapid Course Builder -->
+      <section class="bg-white rounded-2xl shadow-xl p-6 border border-slate-100 interactive-card">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="bg-red-50 p-2 rounded-lg text-[#EE0000]" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          </div>
+          <h2 class="text-xl font-bold">Open Training + Rapid Course Builder (RCB)</h2>
+        </div>
+        <div class="mb-4 flex flex-wrap gap-2 items-center">
+          <span class="inline-block bg-green-50 text-green-800 text-xs font-semibold px-3 py-1 rounded-full">
+            In use for Open Training projects
+          </span>
+        </div>
+        <p class="text-slate-600 mb-3 leading-relaxed">
+          The RCB is your AI drafting assistant for Open Training courses. It takes care of the "heavy lifting"—from structure to first drafts—so you can focus on technical accuracy and real-world insights. We use RCB with current Open Training contributors and will get you set up during your kickoff call.
+        </p>
+        <p class="text-sm text-slate-700 mb-4 border-l-4 border-slate-200 pl-3">
+          <strong class="text-slate-800">We're still improving RCB.</strong> The demo phase is complete and the tool is actively supporting course development today. We have a roadmap of enhancements ahead and welcome your feedback as you build.
+        </p>
+        <p class="text-sm text-slate-600 mb-2"><strong>Key capabilities:</strong></p>
+        <ul class="text-sm text-slate-600 mb-3 list-disc pl-5 space-y-1">
+          <li>Initial content drafting (Antora AsciiDoc based training)</li>
+          <li>GitHub repository creation</li>
+          <li>Image creation</li>
+          <li>Audio and video generation</li>
+        </ul>
+        <p class="text-sm mb-6">
+          <a href="https://videos.learning.redhat.com/playlist/dedicated/1_77janw6f/1_tl3hy55i" target="_blank" rel="noopener noreferrer" class="text-[#EE0000] hover:text-[#CC0000] hover:underline font-medium">Watch the capability playlist</a>
+        </p>
+        <a
+          href="https://redhat.atlassian.net/jira/software/c/projects/RHTR/form/51"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="flex items-center justify-center gap-2 bg-[#EE0000] hover:bg-[#CC0000] text-white font-bold py-4 px-6 rounded-xl transition-all shadow-md active:scale-95 pulse-glow hover:shadow-xl relative overflow-hidden group w-full"
+        >
+          <span class="absolute inset-0 shimmer" aria-hidden="true"></span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="relative z-10" aria-hidden="true"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/></svg>
+          <span class="relative z-10">Ready to share your expertise?</span>
+        </a>
+      </section>
+
+      <div class="bg-white rounded-2xl p-6 shadow-md border border-slate-100 interactive-card">
+        <h3 class="text-lg font-bold mb-2">From your request to published training</h3>
+        <p class="text-sm text-slate-600 mb-4">
+          After you submit the form, here's what happens next. See the <strong>Resources &amp; Support</strong> section below for more information.
+        </p>
+        <ol class="space-y-4 list-none">
+          <li class="flex gap-4 p-3 rounded-lg">
+            <span class="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-red-100 to-red-200 text-[#EE0000] flex items-center justify-center font-bold text-sm" aria-hidden="true">1</span>
+            <div>
+              <h4 class="font-bold text-slate-800">Submit your training idea</h4>
+              <p class="text-sm text-slate-600">Complete the <a href="https://redhat.atlassian.net/jira/software/c/projects/RHTR/form/51" target="_blank" rel="noopener noreferrer" class="text-[#EE0000] hover:text-[#CC0000] hover:underline font-medium">form</a> with your topic, details, and interest in collaborating with the Open Training Program.</p>
+            </div>
+          </li>
+          <li class="flex gap-4 p-3 rounded-lg">
+            <span class="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-red-100 to-red-200 text-[#EE0000] flex items-center justify-center font-bold text-sm" aria-hidden="true">2</span>
+            <div>
+              <h4 class="font-bold text-slate-800">We'll follow up</h4>
+              <p class="text-sm text-slate-600">Our team reviews your request and schedules a kickoff call to confirm access, expectations, and get you started with RCB.</p>
+            </div>
+          </li>
+          <li class="flex gap-4 p-3 rounded-lg">
+            <span class="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-red-100 to-red-200 text-[#EE0000] flex items-center justify-center font-bold text-sm" aria-hidden="true">3</span>
+            <div>
+              <h4 class="font-bold text-slate-800">Build your course</h4>
+              <p class="text-sm text-slate-600">Use RCB to draft and build your course. We'll guide you through the tool and help you create your course repo.</p>
+            </div>
+          </li>
+          <li class="flex gap-4 p-3 rounded-lg">
+            <span class="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-red-100 to-red-200 text-[#EE0000] flex items-center justify-center font-bold text-sm" aria-hidden="true">4</span>
+            <div>
+              <h4 class="font-bold text-slate-800">Review &amp; publish</h4>
+              <p class="text-sm text-slate-600">Our team reviews your final draft after you're done building the course, handles publishing to the LMS, and helps you claim GiveBack points.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+
+      <div class="bg-gradient-to-br from-red-50 to-orange-50 rounded-2xl p-6 shadow-md border border-red-100 interactive-card">
+        <h3 class="text-lg font-bold mb-4 text-[#EE0000]">Why You Should Do This</h3>
+        <ul class="space-y-3 list-none">
+          <li class="flex items-start gap-3">
+            <span class="text-[#EE0000] mt-1" aria-hidden="true">✓</span>
+            <div>
+              <p class="font-semibold text-slate-800">Scale Your Impact</p>
+              <p class="text-sm text-slate-600">Address common customer pain points and fill critical knowledge gaps.</p>
+            </div>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-[#EE0000] mt-1" aria-hidden="true">✓</span>
+            <div>
+              <p class="font-semibold text-slate-800">Get Rewarded</p>
+              <p class="text-sm text-slate-600">Earn GiveBack points for developing new courses or updating existing ones.</p>
+            </div>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-[#EE0000] mt-1" aria-hidden="true">✓</span>
+            <div>
+              <p class="font-semibold text-slate-800">From In-Demand to On-Demand</p>
+              <p class="text-sm text-slate-600">Turn your expertise into a lasting resource available to everyone, anytime.</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Resources -->
+      <section class="mt-12 pt-8 border-t border-slate-200">
+        <h3 class="text-sm font-bold text-slate-400 uppercase tracking-widest mb-4">Resources &amp; Support</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <a href="https://source.redhat.com/departments/products_and_global_engineering/whats_new_from_products_and_portfolio/open_training_program" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 p-3 rounded-lg hover:bg-slate-100 transition-colors">
+            <span class="text-sm font-medium">Open Training Source Page</span>
+          </a>
+          <a href="https://redhat.atlassian.net/jira/software/c/projects/RHTR/form/51" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 p-3 rounded-lg hover:bg-slate-100 transition-colors">
+            <span class="text-sm font-medium">Share a Training Idea</span>
+          </a>
+          <a href="mailto:opentraining@redhat.com" class="flex items-center gap-3 p-3 rounded-lg hover:bg-slate-100 transition-colors">
+            <span class="text-sm font-medium">Contact Support</span>
+          </a>
+          <a href="https://redhat.enterprise.slack.com/archives/C05RM9TSWUF" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 p-3 rounded-lg hover:bg-slate-100 transition-colors">
+            <span class="text-sm font-medium">Slack: #help-open-training</span>
+          </a>
+        </div>
+      </section>
+    </section>
+
+    <!-- Published Courses -->
+    <section class="mt-10" aria-labelledby="courses-heading">
+      <div class="mb-4">
+        <h2 id="courses-heading" class="text-xl font-bold">Published Courses</h2>
+      </div>
+
+      <div class="bg-white rounded-xl shadow-md border border-slate-200 p-4">
+        <label for="course-search" class="sr-only">Search courses</label>
+        <input
+          type="search"
+          id="course-search"
+          placeholder="Search by title, contributor, or product area…"
+          autocomplete="off"
+          class="w-full px-4 py-3 mb-4 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#EE0000] focus:border-transparent"
+        >
+
+        <div id="category-filters" class="flex flex-wrap gap-2 mb-4" role="group" aria-label="Filter by product area"></div>
+
+        <div id="courses-list" class="space-y-6">
+          <p class="text-sm text-slate-500 text-center py-8">Loading courses…</p>
+        </div>
+
+        <p id="no-results" class="hidden text-sm text-slate-500 text-center py-8">No courses match your search.</p>
+      </div>
+    </section>
+
+    <footer class="mt-16 text-center text-slate-400 text-xs">
+      <p class="mt-2 font-mono">Build. Share. Revolutionize.</p>
+    </footer>
+  </main>
+
+  <script>
+    const CATEGORY_ORDER = [
+      'OpenShift',
+      'OpenStack & RHOSO',
+      'Satellite',
+      'Ansible',
+      'Developer'
+    ];
+
+    let allCourses = [];
+    let activeCategory = 'all';
+    let searchQuery = '';
+
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    function renderCourseCard(course) {
+      const newBadge = course.isNew
+        ? '<span class="inline-block bg-[#EE0000] text-white text-xs font-semibold px-2 py-0.5 rounded-full ml-2">New</span>'
+        : '';
+
+      return `
+        <article class="course-card bg-slate-50 p-5 rounded-xl border border-slate-200 hover:border-red-300 hover:shadow-md transition-all">
+          <div class="mb-3">
+            <h4 class="font-bold text-slate-900">
+              ${escapeHtml(course.title)}${newBadge}
+            </h4>
+            ${course.contributors ? `<p class="text-xs text-slate-500 mt-1">Contributors: ${escapeHtml(course.contributors)}</p>` : ''}
+          </div>
+          <div class="flex items-center justify-center gap-4 pt-3 border-t border-slate-100">
+            <a href="${escapeHtml(course.associateLink)}" target="_blank" rel="noopener noreferrer" class="text-sm font-medium text-[#EE0000] hover:text-[#CC0000] hover:underline transition-colors">Associate</a>
+            <span class="text-slate-300" aria-hidden="true">|</span>
+            <a href="${escapeHtml(course.partnerLink)}" target="_blank" rel="noopener noreferrer" class="text-sm font-medium text-[#EE0000] hover:text-[#CC0000] hover:underline transition-colors">Partner</a>
+          </div>
+        </article>
+      `;
+    }
+
+    function getFilteredCourses() {
+      const query = searchQuery.toLowerCase().trim();
+
+      return allCourses.filter((course) => {
+        const matchesCategory = activeCategory === 'all' || course.category === activeCategory;
+        if (!matchesCategory) return false;
+        if (!query) return true;
+
+        const haystack = [
+          course.title,
+          course.contributors,
+          course.category
+        ].join(' ').toLowerCase();
+
+        return haystack.includes(query);
+      });
+    }
+
+    function groupByCategory(courses) {
+      const groups = new Map();
+      courses.forEach((course) => {
+        if (!groups.has(course.category)) {
+          groups.set(course.category, []);
+        }
+        groups.get(course.category).push(course);
+      });
+      return groups;
+    }
+
+    function renderCourses() {
+      const filtered = getFilteredCourses();
+      const listEl = document.getElementById('courses-list');
+      const noResultsEl = document.getElementById('no-results');
+
+      if (filtered.length === 0) {
+        listEl.innerHTML = '';
+        noResultsEl.classList.remove('hidden');
+        return;
+      }
+
+      noResultsEl.classList.add('hidden');
+      const groups = groupByCategory(filtered);
+
+      const sections = CATEGORY_ORDER
+        .filter((cat) => groups.has(cat))
+        .map((cat) => {
+          const cards = groups.get(cat).map(renderCourseCard).join('');
+          return `
+            <section aria-labelledby="category-${cat.replace(/\s+/g, '-').toLowerCase()}">
+              <h3 id="category-${cat.replace(/\s+/g, '-').toLowerCase()}" class="text-sm font-bold text-slate-400 uppercase tracking-widest mb-3">${escapeHtml(cat)}</h3>
+              <div class="space-y-3">${cards}</div>
+            </section>
+          `;
+        });
+
+      listEl.innerHTML = sections.join('');
+    }
+
+    function renderCategoryFilters() {
+      const container = document.getElementById('category-filters');
+      const categories = ['all', ...CATEGORY_ORDER.filter((cat) =>
+        allCourses.some((c) => c.category === cat)
+      )];
+
+      container.innerHTML = categories.map((cat) => {
+        const label = cat === 'all' ? 'All' : cat;
+        const isActive = activeCategory === cat;
+        return `
+          <button
+            type="button"
+            data-category="${escapeHtml(cat)}"
+            aria-pressed="${isActive}"
+            class="px-3 py-1.5 rounded-full text-xs font-semibold transition-colors ${
+              isActive
+                ? 'bg-[#EE0000] text-white'
+                : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+            }"
+          >${escapeHtml(label)}</button>
+        `;
+      }).join('');
+
+      container.querySelectorAll('button').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          activeCategory = btn.dataset.category;
+          renderCategoryFilters();
+          renderCourses();
+        });
+      });
+    }
+
+    async function init() {
+      try {
+        const response = await fetch('./courses.json');
+        const data = await response.json();
+        allCourses = data.courses;
+        renderCategoryFilters();
+        renderCourses();
+      } catch (err) {
+        document.getElementById('courses-list').innerHTML =
+          '<p class="text-sm text-red-600 text-center py-8">Unable to load courses. Please refresh the page.</p>';
+        console.error('Failed to load courses:', err);
+      }
+    }
+
+    document.getElementById('course-search').addEventListener('input', (e) => {
+      searchQuery = e.target.value;
+      renderCourses();
+    });
+
+    init();
   </script>
 </body>
 </html>

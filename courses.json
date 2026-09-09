@@ -1,0 +1,140 @@
+{
+  "courses": [
+    {
+      "title": "RHOSO Chargeback and Observability Fundamentals (HOL25) v18.0",
+      "contributors": "Victoria Martinez de la Cruz",
+      "category": "OpenStack & RHOSO",
+      "associateLink": "https://training-lms.redhat.com/sso/saml/auth/rhlpint?RelayState=deeplinkoffering%3D94195786",
+      "partnerLink": "https://training-lms.redhat.com/sso/saml/auth/rhopen?RelayState=deeplinkoffering%3D94195949",
+      "isNew": true
+    },
+    {
+      "title": "OpenShift Virtualization cookbook",
+      "contributors": "Alexandre Menezes, Andrea Perotti, Daphne Hoover, Josh Manning, Melvin Hillsman, Roshan Warrier, Yash Devan Oza and the community",
+      "category": "OpenShift",
+      "associateLink": "https://training-lms.redhat.com/sso/saml/auth/rhlpint?RelayState=deeplinkoffering%3D91035470",
+      "partnerLink": "https://training-lms.redhat.com/sso/saml/auth/rhopen?RelayState=deeplinkoffering%3D91035471",
+      "isNew": true
+    },
+    {
+      "title": "Java Architecture and Core Concepts",
+      "contributors": "Francisco de Melo Junior",
+      "category": "Developer",
+      "associateLink": "https://training-lms.redhat.com/sso/saml/auth/rhlpint?RelayState=deeplinkoffering%3D92171516",
+      "partnerLink": "https://training-lms.redhat.com/sso/saml/auth/rhopen?RelayState=deeplinkoffering%3D92171517",
+      "isNew": true
+    },
+    {
+      "title": "AMQ Broker on OpenShift: Deployment and Management",
+      "contributors": "Avinash Dongre",
+      "category": "OpenShift",
+      "associateLink": "https://training-lms.redhat.com/sso/saml/auth/rhlpint?RelayState=deeplinkoffering%3D92125891",
+      "partnerLink": "https://training-lms.redhat.com/sso/saml/auth/rhopen?RelayState=deeplinkoffering%3D92125893",
+      "isNew": true
+    },
+    {
+      "title": "Product Enablement: OpenShift Workload Partitioning Deep Dive",
+      "contributors": "George Zheng Wang",
+      "category": "OpenShift",
+      "associateLink": "https://training-lms.redhat.com/sso/saml/auth/rhlpint?RelayState=deeplinkoffering%3D89630557",
+      "partnerLink": "https://training-lms.redhat.com/sso/saml/auth/rhopen?RelayState=deeplinkoffering%3D89630558",
+      "isNew": false
+    },
+    {
+      "title": "Product Enablement: Customize RHCOS to add rsyslog package",
+      "contributors": "George Zheng Wang",
+      "category": "OpenShift",
+      "associateLink": "https://training-lms.redhat.com/sso/saml/auth/rhlpint?RelayState=deeplinkoffering%3D87421031",
+      "partnerLink": "https://training-lms.redhat.com/sso/saml/auth/rhopen?RelayState=deeplinkoffering%3D87421032",
+      "isNew": false
+    },
+    {
+      "title": "Ansible Boot Camp Day 1",
+      "contributors": "Andrew Block, Walter Bentley, Vinny Valdez",
+      "category": "Ansible",
+      "associateLink": "https://training-lms.redhat.com/sso/saml/auth/rhlpint?RelayState=deeplinkoffering%3D88668943",
+      "partnerLink": "https://training-lms.redhat.com/sso/saml/auth/rhopen?RelayState=deeplinkoffering%3D88668944",
+      "isNew": false
+    },
+    {
+      "title": "Product Enablement: OpenShift Perf and Scale Benchmarking",
+      "contributors": "Jose Castillo Lema",
+      "category": "OpenShift",
+      "associateLink": "https://training-lms.redhat.com/sso/saml/auth/rhlpint?RelayState=deeplinkoffering%3D87474307",
+      "partnerLink": "https://training-lms.redhat.com/sso/saml/auth/rhopen?RelayState=deeplinkoffering%3D87474435",
+      "isNew": false
+    },
+    {
+      "title": "Red Hat OpenStack Platform 17.1 to 18 upgrade",
+      "contributors": "Pedro Navarro Perez",
+      "category": "OpenStack & RHOSO",
+      "associateLink": "https://training-lms.redhat.com/sso/saml/auth/rhlpint?RelayState=deeplinkoffering%3D87404342",
+      "partnerLink": "https://training-lms.redhat.com/sso/saml/auth/rhopen?RelayState=deeplinkoffering%3D87404343",
+      "isNew": false
+    },
+    {
+      "title": "Red Hat Advanced Developer Suite: Technical Enablement",
+      "contributors": "James Falkner, Evan Shortiss, Markus Nagel, Josh Wood, Ian Lawson, Valentina Rodriguez Sosa",
+      "category": "Developer",
+      "associateLink": "https://training-lms.redhat.com/sso/saml/auth/rhlpint?RelayState=deeplinkoffering%3D86446329",
+      "partnerLink": "https://training-lms.redhat.com/sso/saml/auth/rhopen?RelayState=deeplinkoffering%3D86471369",
+      "isNew": false
+    },
+    {
+      "title": "Hosted Control Planes on a Single Bare Metal Node",
+      "contributors": "Sadique Puthen Peedikayil, Praveen Thakur, Ami Desai",
+      "category": "OpenShift",
+      "associateLink": "https://training-lms.redhat.com/sso/saml/auth/rhlpint?RelayState=deeplinkoffering%3D82958185",
+      "partnerLink": "https://training-lms.redhat.com/sso/saml/auth/rhopen?RelayState=deeplinkoffering%3D82958309",
+      "isNew": false
+    },
+    {
+      "title": "Troubleshooting instance connectivity issue in Red Hat OpenStack Platform 18 (BFX028) v18.0",
+      "contributors": "Slawek Kaplonski",
+      "category": "OpenStack & RHOSO",
+      "associateLink": "https://training-lms.redhat.com/sso/saml/auth/rhlpint?RelayState=deeplinkoffering%3D82263488",
+      "partnerLink": "https://training-lms.redhat.com/sso/saml/auth/rhopen?RelayState=deeplinkoffering%3D82870780",
+      "isNew": false
+    },
+    {
+      "title": "Leapp Upgrade with Red Hat Satellite 6",
+      "contributors": "Soham Majumdar, Manu Sunil",
+      "category": "Satellite",
+      "associateLink": "https://training-lms.redhat.com/sso/saml/auth/rhlpint?RelayState=deeplinkoffering%3D74305503",
+      "partnerLink": "https://training-lms.redhat.com/sso/saml/auth/rhopen?RelayState=deeplinkoffering%3D74405084",
+      "isNew": false
+    },
+    {
+      "title": "Minor upgrade of Red Hat Satellite 6.15 to 6.15.z",
+      "contributors": "Soham Majumdar, Manu Sunil",
+      "category": "Satellite",
+      "associateLink": "https://training-lms.redhat.com/sso/saml/auth/rhlpint?RelayState=deeplinkoffering%3D74347503",
+      "partnerLink": "https://training-lms.redhat.com/sso/saml/auth/rhopen?RelayState=deeplinkoffering%3D74405085",
+      "isNew": false
+    },
+    {
+      "title": "Fixing httpd Service on Red Hat Satellite 6",
+      "contributors": "Soham Majumdar, Manu Sunil",
+      "category": "Satellite",
+      "associateLink": "https://training-lms.redhat.com/sso/saml/auth/rhlpint?RelayState=deeplinkoffering%3D74347502",
+      "partnerLink": "https://training-lms.redhat.com/sso/saml/auth/rhopen?RelayState=deeplinkoffering%3D74405083",
+      "isNew": false
+    },
+    {
+      "title": "Fixing and Optimizing Performance on Red Hat Satellite 6",
+      "contributors": "Soham Majumdar, Manu Sunil",
+      "category": "Satellite",
+      "associateLink": "https://training-lms.redhat.com/sso/saml/auth/rhlpint?RelayState=deeplinkoffering%3D74347501",
+      "partnerLink": "https://training-lms.redhat.com/sso/saml/auth/rhopen?RelayState=deeplinkoffering%3D74405081",
+      "isNew": false
+    },
+    {
+      "title": "Configuring tftp on Red Hat Satellite 6",
+      "contributors": "Soham Majumdar, Manu Sunil",
+      "category": "Satellite",
+      "associateLink": "https://training-lms.redhat.com/sso/saml/auth/rhlpint?RelayState=deeplinkoffering%3D74347498",
+      "partnerLink": "https://training-lms.redhat.com/sso/saml/auth/rhopen?RelayState=deeplinkoffering%3D74405080",
+      "isNew": false
+    }
+  ]
+}

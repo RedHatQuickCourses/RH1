@@ -1,5 +1,52 @@
 # Tasks
 
+## Course additions and page improvements - Completed 2026-09-09
+
+### Overview
+Added four new published courses and refactored the landing page for easier maintenance, better discoverability, and improved accessibility.
+
+### Completed Tasks
+
+#### 1. Add four new courses ✅
+- AMQ Broker on OpenShift: Deployment and Management (Avinash Dongre)
+- Java Architecture and Core Concepts (Francisco de Melo Junior)
+- OpenShift Virtualization cookbook (community contributors)
+- RHOSO Chargeback and Observability Fundamentals (HOL25) v18.0 (Victoria Martinez de la Cruz)
+
+#### 2. Move course data to courses.json ✅
+- All 17 courses now live in `courses.json` (newest first)
+- Course count derived automatically from array length
+- Categories: OpenShift, OpenStack & RHOSO, Satellite, Ansible, Developer
+
+#### 3. Replace auto-scroller with searchable list ✅
+- Search by title, contributor, or product area
+- Category filter buttons
+- "New" badge on recently added courses
+- Courses grouped by product area within results
+
+#### 4. Accessibility improvements ✅
+- Removed auto-scroll and wheel-event blocking
+- `prefers-reduced-motion` disables animations
+- Skip-to-content link, semantic HTML, `aria-pressed` on filters
+- Search input with screen-reader label
+
+#### 5. Lighter page stack ✅
+- Removed React, ReactDOM, and Babel-in-browser
+- Vanilla HTML/CSS/JS with Tailwind CDN
+
+#### 6. Other fixes ✅
+- Fixed RHCOS partner link typo (`87421032`)
+- Removed duplicate Marc Ewing quote from footer
+- Added Open Graph meta tags and Red Hat favicon
+- Updated README to reflect current structure
+
+### Files Modified/Created
+- `courses.json` (created)
+- `index.html` (refactored)
+- `README.md` (updated)
+
+---
+
 ## RCB Post-RH1 Form and Guided Approach - Completed 2024-12-19
 
 ### Overview
